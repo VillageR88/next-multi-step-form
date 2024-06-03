@@ -29,7 +29,7 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[12px] text-[#ABBCFF]">{titles.step + [index + 1].toString()}</span>
-                  <span className="text-[14px] font-bold text-white">{items[index]}</span>
+                  <span className="text-[14px] font-bold text-white">{item}</span>
                 </div>
               </li>
             ))}

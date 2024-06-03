@@ -31,7 +31,7 @@ p {
 }
 
 input {
-  @apply h-[48px] w-full rounded-[8px] px-[16px] text-[16px] font-medium leading-[25px] outline outline-1 outline-[#D6D9E6] placeholder:text-[#747B95]/50;
+  @apply h-[48px] w-full rounded-[8px] text-[#022959] px-[16px] text-[16px] font-medium leading-[25px] outline outline-1 outline-[#D6D9E6] placeholder:text-[#9699AA];
 }
 
 .inputDiv {
