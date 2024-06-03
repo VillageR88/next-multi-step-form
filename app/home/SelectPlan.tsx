@@ -1,4 +1,4 @@
-export default function YourInfo() {
+export default function SelectPlan({ visibility }: { visibility: string }) {
   const items = {
     title: 'Personal info',
     description: 'Please provide your name, email address, and phone number.',
@@ -22,7 +22,7 @@ export default function YourInfo() {
     },
   };
   return (
-    <div className="mt-[40px] flex h-[348px] w-full max-w-[450px] flex-col gap-[40px]">
+    <div className={`mt-[40px] flex h-[348px] w-full max-w-[450px] flex-col gap-[40px] ${visibility}`}>
       <header className="flex h-[68px] flex-col gap-[11px]">
         <h1>{items.title}</h1>
         <p>{items.description}</p>

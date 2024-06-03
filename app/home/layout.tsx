@@ -1,21 +1,17 @@
 'use client';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useContext } from 'react';
+import { DataContext } from '@/app/_providers/DataContext';
 import Image from 'next/image';
 import imageSidebarDesktop from '@/public/assets/images/bg-sidebar-desktop.svg';
+import { Steps } from '@/app/_providers/DataContext';
 
 export default function LayoutHome({ children }: { children: ReactNode }) {
-  enum Steps {
-    YOUR_INFO = 'YOUR INFO',
-    SELECT_PLAN = 'SELECT PLAN',
-    ADD_ONS = 'ADD-ONS',
-    SUMMARY = 'SUMMARY',
-  }
+  const { stageCheck, currentStep, setCurrentStep } = useContext(DataContext);
   const circleDisplay = {
     normal: 'text-white border-white',
     selected: 'text-[#022959] bg-[#BEE2FD] border-[#BEE2FD]',
   };
-  const [currentStep, setCurrentStep] = useState<Steps>(Steps.YOUR_INFO);
-  const items = [Steps.YOUR_INFO, Steps.SELECT_PLAN, Steps.ADD_ONS, Steps.SUMMARY];
+  const items = Object.values(Steps);
   const titles = {
     step: 'STEP ',
     buttonPrevious: 'Go Back',
@@ -67,7 +63,7 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
             <button
               onClick={() => {
                 const currentIndex = items.indexOf(currentStep);
-                if (currentIndex < items.length - 1) {
+                if (currentIndex < items.length - 1 && stageCheck[currentIndex]) {
                   setCurrentStep(items[currentIndex + 1]);
                 }
               }}
