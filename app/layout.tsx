@@ -1,22 +1,23 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Kumbh_Sans } from 'next/font/google';
+import { Ubuntu } from 'next/font/google';
 import DataProvider from '@/app/_providers/DataContext';
+import { ReactNode } from 'react';
 
-const kumbhSans = Kumbh_Sans({
+const ubuntu = Ubuntu({
   display: 'swap',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-kumbhSans',
+  weight: ['300', '400', '500', '700'],
+  variable: '--font-ubuntu',
   subsets: ['latin', 'latin-ext'],
 });
 
 export const metadata: Metadata = {
-  title: 'Officelite coming soon site',
-  description: 'Officelite coming soon site',
-  applicationName: 'Officelite coming soon site',
+  title: 'Multi-step form',
+  description: 'Multi-step form',
+  applicationName: 'Multi-step form',
 } as const;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -25,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link>
         <meta property="og:image" content={undefined} />
       </head>
-      <body className={`${kumbhSans.variable} bg-[#FAFAFA]`}>
+      <body className={`${ubuntu.variable} bg-[#EFF5FF]`}>
         <DataProvider>{children}</DataProvider>
       </body>
     </html>

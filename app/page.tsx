@@ -1,13 +1,9 @@
-import Header from '@/app/home/Header';
-import Main from '@/app/home/Main';
-import Footer from './home/Footer';
+import LayoutHome from './home/layout';
 
 export default function Home() {
   return (
-    <div className="relative z-0 flex min-h-dvh flex-col items-center justify-start overflow-x-clip font-kumbhSans sm:min-h-screen">
-      <Header />
-      <Main />
-      <Footer />
-    </div>
+    <LayoutHome>
+      <h1>Home</h1>
+    </LayoutHome>
   );
 }
