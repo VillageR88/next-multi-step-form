@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  @apply shadow-[0_0_0_30px_white_inset] dark:shadow-[0_0_0_30px_#1c1c1c_inset];
+  -webkit-text-fill-color: black;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-text-size-adjust: none;
+}
+:is(.dark) input:-webkit-autofill {
+  -webkit-text-fill-color: white;
+}
+
+h1 {
+  @apply screen1200:text-[56px] text-[40px] font-bold screen1200:leading-[64px] leading-[48px];
+}
+
+h2 {
+  @apply text-[20px] font-bold leading-[28px];
+}
+
+p {
+  @apply text-[18px] leading-[28px];
+}
+
+.p1 {
+  @apply text-[56px] font-bold leading-[64px];
+}
+
+.p2 {
+  @apply text-[16px];
+}
+
+button {
+  @apply h-[56px] w-[171px] rounded-[28px] text-[16px] font-bold leading-[28px] text-[#FFFFFF];
+}
+
+input {
+  @apply h-[69px] w-full text-[16px] leading-[28px] outline-none placeholder:text-[#747B95]/50;
+}
+
+.inputDiv {
+  @apply flex items-center gap-4 border-b pl-[16px] pr-[20px] w-full;
+}
