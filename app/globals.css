@@ -26,6 +26,10 @@ h2 {
   @apply text-[16px] font-medium text-[#022959];
 }
 
+h3 {
+  @apply text-[14px] font-bold transition-colors;
+}
+
 p {
   @apply text-[14px] font-normal text-[#9699AA];
 }
@@ -49,7 +53,7 @@ input[type='radio'] {
 }
 
 .radioParent {
-  @apply flex w-[138px] cursor-pointer pb-[16px] flex-col gap-[39px] rounded-[8px] pl-[24px] pt-[20px] outline outline-1 outline-[#D6D9E6] transition hover:outline-[#483EFF];
+  @apply flex w-[138px] cursor-pointer flex-col gap-[39px] rounded-[8px] pb-[16px] pl-[24px] pt-[20px] outline outline-1 outline-[#D6D9E6] transition hover:outline-[#483EFF];
 }
 
 .inputDiv {

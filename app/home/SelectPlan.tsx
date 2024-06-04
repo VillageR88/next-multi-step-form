@@ -20,7 +20,7 @@ const RadioInput = ({
 }) => {
   return (
     <label className="radioParent">
-      <input className="absolute" required type="radio" id={id} name="queryType" />
+      <input className="absolute size-0" required type="radio" id={id} name="queryType" />
       <Image src={src} width={40} height={40} className="size-[40px]" alt="icon" />
       <div className="flex flex-col">
         <h2>{title}</h2>
@@ -57,6 +57,11 @@ export default function SelectPlan() {
       },
     ],
   };
+  const billingType = {
+    monthly: 'Monthly',
+    yearly: 'Yearly',
+  };
+
   return (
     <div
       className={`mt-[40px] flex h-[348px] w-full max-w-[450px] flex-col gap-[40px] ${currentStep === thisStepName ? 'block' : 'hidden'}`}
@@ -65,13 +70,30 @@ export default function SelectPlan() {
         <h1>{items.title}</h1>
         <p>{items.description}</p>
       </header>
-      <ul className="flex gap-[24px]">
-        {items.fields.map((field, index) => (
-          <li key={index}>
-            <RadioInput id={field.id} title={field.title} description={field.description} src={field.src} />
-          </li>
-        ))}
-      </ul>
+      <div className="flex flex-col gap-[32px]">
+        <ul className="flex gap-[24px]">
+          {items.fields.map((field, index) => (
+            <li key={index}>
+              <RadioInput id={field.id} title={field.title} description={field.description} src={field.src} />
+            </li>
+          ))}
+        </ul>
+        <div className="group flex h-[48px] items-center justify-center gap-[24px] rounded-[8px] bg-[#F8F9FF]">
+          <h3 className="text-[#022959] group-has-[input:checked]:text-[#9699AA]">{billingType.monthly}</h3>
+          <label
+            className="flex h-[20px] w-[38px] cursor-pointer items-center justify-center rounded-[10px] bg-[#022959] *:cursor-pointer"
+            htmlFor="billing"
+          >
+            <input
+              title={undefined}
+              className="size-[12px] -translate-x-2 appearance-none rounded-full bg-white transition checked:translate-x-2"
+              type="checkbox"
+              id="billing"
+            />
+          </label>
+          <h3 className="text-[#9699AA] group-has-[input:checked]:text-[#022959]">{billingType.yearly}</h3>
+        </div>
+      </div>
     </div>
   );
 }
