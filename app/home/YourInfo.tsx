@@ -38,10 +38,10 @@ export default function YourInfo() {
         const tel = field3Ref.current?.value;
         if (name && email && tel) {
           setCurrentStep(Steps.SELECT_PLAN);
+          setHandleCheck(false);
         }
       };
       validate();
-      setHandleCheck(false);
     }
   }, [currentStep, handleCheck, setCurrentStep, setHandleCheck, thisStepName]);
 

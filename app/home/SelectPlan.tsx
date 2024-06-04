@@ -1,6 +1,6 @@
 'use client';
 import { Steps } from '@/app/_providers/DataContext';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
 import Image from 'next/image';
 import imageArcade from '@/public/assets/images/icon-arcade.svg';
@@ -36,8 +36,16 @@ const RadioInput = ({
 };
 
 export default function SelectPlan() {
-  const { currentStep, handleCheck, setHandleCheck, setCurrentStep } = useContext(DataContext);
   const thisStepName = Steps.SELECT_PLAN;
+
+  const { currentStep, handleCheck, setCurrentStep, setHandleCheck } = useContext(DataContext);
+  useEffect(() => {
+    if (handleCheck && currentStep === thisStepName) {
+      setCurrentStep(Steps.ADD_ONS);
+      setHandleCheck(false);
+    }
+  }, [currentStep, handleCheck, setCurrentStep, setHandleCheck, thisStepName]);
+
   const items = {
     title: 'Select your plan',
     description: 'You have the option of monthly or yearly billing.',
