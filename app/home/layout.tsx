@@ -19,7 +19,7 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
   };
 
   return (
-    <main className="relative z-0 flex min-h-dvh flex-col items-center justify-center overflow-x-clip px-6 font-ubuntu sm:min-h-screen">
+    <main className="group/home relative z-0 flex min-h-dvh flex-col items-center justify-center overflow-x-clip px-6 font-ubuntu sm:min-h-screen">
       <form className="flex h-[600px] w-full max-w-[940px] items-center justify-between gap-[100px] rounded-[15px] bg-white py-[16px] pl-[16px] pr-[100px]">
         <div className="relative min-h-[568px] min-w-[274px]">
           <Image

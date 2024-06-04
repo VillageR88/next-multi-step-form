@@ -71,7 +71,12 @@ export default function Addons() {
                   <h2>{field.title}</h2>
                   <p>{field.description}</p>
                 </div>
-                <span className="text-[14px] leading-[20px] text-[#483EFF]">{field.costMonthly}</span>
+                <span className="addonCost group-has-[input[name='billing']:checked]/home:hidden">
+                  {field.costMonthly}
+                </span>
+                <span className="addonCost hidden group-has-[input[name='billing']:checked]/home:block">
+                  {field.costYearly}
+                </span>
               </div>
             </label>
           </li>

@@ -75,3 +75,7 @@ input[type='radio'] {
 .inputDiv {
   @apply flex flex-col gap-[8px];
 }
+
+.addonCost {
+  @apply text-[14px] leading-[20px] text-[#483EFF];
+}

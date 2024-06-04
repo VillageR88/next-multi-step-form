@@ -115,7 +115,7 @@ export default function SelectPlan() {
           >
             <input
               title={undefined}
-              className="size-[12px] -translate-x-2 cursor-pointer appearance-none rounded-full bg-white transition checked:translate-x-2"
+              className="billingMethod size-[12px] -translate-x-2 cursor-pointer appearance-none rounded-full bg-white transition checked:translate-x-2"
               type="checkbox"
               id="billing"
               name="billing"
