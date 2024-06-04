@@ -45,7 +45,7 @@ input[type='tel'] {
 }
 
 input[type='radio'] {
-  @apply appearance-none border-none;
+  @apply appearance-none;
 }
 
 .radioParent:has(input[type='radio']:checked) {
@@ -57,7 +57,7 @@ input[type='radio'] {
 }
 
 .radioParent {
-  @apply flex w-[138px] cursor-pointer flex-col gap-[39px] rounded-[8px] pb-[16px] pl-[24px] pt-[20px] border border-[#D6D9E6] transition hover:border-[#483EFF];
+  @apply flex w-[138px] cursor-pointer flex-col gap-[39px] rounded-[8px] pb-[16px] pl-[24px] pt-[20px] border border-[#D6D9E6]  hover:border-[#483EFF];
 }
 
 .checkParent {

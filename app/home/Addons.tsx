@@ -57,7 +57,7 @@ export default function Addons() {
           <li className="flex" key={index}>
             <label htmlFor={field.id} className="checkParent group flex items-center px-[24px]">
               <input title={undefined} id={field.id} className="absolute size-0" type="checkbox" />
-              <div className="flex size-[20px] items-center justify-center rounded-[4px] border border-[#D6D9E6] bg-transparent group-has-[input:checked]:border-[#483EFF] group-has-[input:checked]:bg-[#483EFF]">
+              <div className="flex size-[20px] select-none items-center justify-center rounded-[4px] border border-[#D6D9E6] bg-transparent group-has-[input:checked]:border-[#483EFF] group-has-[input:checked]:bg-[#483EFF]">
                 <Image
                   alt="checkbox"
                   className="h-[9px] w-[12px]"
