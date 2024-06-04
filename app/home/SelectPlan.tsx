@@ -78,20 +78,31 @@ export default function SelectPlan() {
             </li>
           ))}
         </ul>
-        <div className="group flex h-[48px] items-center justify-center gap-[24px] rounded-[8px] bg-[#F8F9FF]">
-          <h3 className="text-[#022959] group-has-[input:checked]:text-[#9699AA]">{billingType.monthly}</h3>
+        <div className="group flex h-[48px] items-center justify-center gap-[24px] rounded-[8px] bg-[#F8F9FF] *:cursor-pointer">
           <label
-            className="flex h-[20px] w-[38px] cursor-pointer items-center justify-center rounded-[10px] bg-[#022959] *:cursor-pointer"
+            htmlFor="billing"
+            className="h3Label select-none text-[#022959] active:cursor-default group-has-[input:not(:checked)]:pointer-events-none group-has-[input:checked]:text-[#9699AA]"
+          >
+            {billingType.monthly}
+          </label>
+          <label
+            className="flex h-[20px] w-[38px] items-center justify-center rounded-[10px] bg-[#022959]"
             htmlFor="billing"
           >
             <input
               title={undefined}
-              className="size-[12px] -translate-x-2 appearance-none rounded-full bg-white transition checked:translate-x-2"
+              className="size-[12px] -translate-x-2 cursor-pointer appearance-none rounded-full bg-white transition checked:translate-x-2"
               type="checkbox"
               id="billing"
+              name="billing"
             />
           </label>
-          <h3 className="text-[#9699AA] group-has-[input:checked]:text-[#022959]">{billingType.yearly}</h3>
+          <label
+            htmlFor="billing"
+            className="h3Label select-none text-[#9699AA] active:cursor-default group-has-[input:checked]:pointer-events-none group-has-[input:checked]:text-[#022959]"
+          >
+            {billingType.yearly}
+          </label>
         </div>
       </div>
     </div>
