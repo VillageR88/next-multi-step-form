@@ -3,6 +3,7 @@ import { Steps } from '@/app/_providers/DataContext';
 import { useContext, useEffect } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
 import Image from 'next/image';
+import imageCheckmark from '@/public/assets/images/icon-checkmark.svg';
 
 export default function Addons() {
   const thisStepName = Steps.ADD_ONS;
@@ -23,17 +24,22 @@ export default function Addons() {
         id: 'onlineService',
         title: 'Online service',
         description: 'Access to multiplayer games',
-        cost: '$5/mo',
+        costMonthly: '+$1/mo',
+        costYearly: '+$10/yr',
       },
       {
-        id: 'advanced',
-        title: 'Advanced',
-        description: '$12/mo',
+        id: 'largerstorage',
+        title: 'Larger storage',
+        description: 'Extra 1TB of cloud save',
+        costMonthly: '+$2/mo',
+        costYearly: '+$20/yr',
       },
       {
-        id: 'pro',
-        title: 'Pro',
-        description: '$15/mo',
+        id: 'customizableprofile',
+        title: 'Customizable profile',
+        description: 'Custom theme on your profile',
+        costMonthly: '+$2/mo',
+        costYearly: '+$20/yr',
       },
     ],
   };
@@ -46,13 +52,24 @@ export default function Addons() {
         <h1>{items.title}</h1>
         <p>{items.description}</p>
       </header>
-      <div className=" flex flex-col gap-[32px]">
-        <ul className="flex gap-[24px]">
-          {items.fields.map((field, index) => (
-            <li key={index}></li>
-          ))}
-        </ul>
-      </div>
+      <ul className="flex flex-col gap-[16px]">
+        {items.fields.map((field, index) => (
+          <li className="flex" key={index}>
+            <label htmlFor={field.id} className="checkParent group flex items-center px-[24px]">
+              <input title={undefined} id={field.id} className="absolute size-0" type="checkbox" />
+              <div className="flex size-[20px] items-center justify-center rounded-[4px] border border-[#D6D9E6] bg-transparent group-has-[input:checked]:border-[#483EFF] group-has-[input:checked]:bg-[#483EFF]">
+                <Image
+                  alt="checkbox"
+                  className="h-[9px] w-[12px]"
+                  width={12}
+                  height={9}
+                  src={imageCheckmark as string}
+                />
+              </div>
+            </label>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

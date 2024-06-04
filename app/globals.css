@@ -41,19 +41,27 @@ label {
 input[type='text'],
 input[type='email'],
 input[type='tel'] {
-  @apply h-[48px] w-full rounded-[8px] px-[16px] text-[16px] font-medium leading-[25px] text-[#022959] outline outline-1 outline-[#D6D9E6] placeholder:text-[#9699AA] focus:outline-[#483EFF];
+  @apply h-[48px] w-full rounded-[8px] px-[16px] text-[16px] font-medium leading-[25px] outline-none text-[#022959] border border-[#D6D9E6] placeholder:text-[#9699AA] focus:border-[#483EFF];
 }
 
 input[type='radio'] {
-  @apply appearance-none outline-none;
+  @apply appearance-none border-none;
 }
 
 .radioParent:has(input[type='radio']:checked) {
-  @apply bg-[#F8F9FF] outline-[#483EFF] transition;
+  @apply bg-[#F8F9FF] border-[#483EFF] transition;
+}
+
+.checkParent:has(input[type='checkbox']:checked) {
+  @apply bg-[#F8F9FF] border-[#483EFF] transition;
 }
 
 .radioParent {
-  @apply flex w-[138px] cursor-pointer flex-col gap-[39px] rounded-[8px] pb-[16px] pl-[24px] pt-[20px] outline outline-1 outline-[#D6D9E6] transition hover:outline-[#483EFF];
+  @apply flex w-[138px] cursor-pointer flex-col gap-[39px] rounded-[8px] pb-[16px] pl-[24px] pt-[20px] border border-[#D6D9E6] transition hover:border-[#483EFF];
+}
+
+.checkParent {
+  @apply h-[81px] w-full cursor-pointer rounded-[8px] border border-[#D6D9E6] hover:border-[#483EFF];
 }
 
 .inputDiv {
