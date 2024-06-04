@@ -1,11 +1,8 @@
 'use client';
-import { useContext, useRef } from 'react';
+import { useContext } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
 export default function YourInfo() {
-  const field2Ref = useRef<HTMLInputElement>(null);
-  const field3Ref = useRef<HTMLInputElement>(null);
-  //const thisStepName = Steps.YOUR_INFO;
-  const { yourInfoRef, nameRef } = useContext(DataContext);
+  const { yourInfoRef, nameRef, mailRef, telRef } = useContext(DataContext);
   const items = {
     title: 'Personal info',
     description: 'Please provide your name, email address, and phone number.',
@@ -54,7 +51,8 @@ export default function YourInfo() {
         <div className="inputDiv">
           <label htmlFor={items.field2.id}>{items.field2.label}</label>
           <input
-            ref={field2Ref}
+            onChange={() => mailRef.current?.classList.remove('errorInput')}
+            ref={mailRef}
             id={items.field2.id}
             name={items.field2.id}
             type={items.field2.type}
@@ -65,7 +63,8 @@ export default function YourInfo() {
         <div className="inputDiv">
           <label htmlFor={items.field3.id}>{items.field3.label}</label>
           <input
-            ref={field3Ref}
+            onChange={() => telRef.current?.classList.remove('errorInput')}
+            ref={telRef}
             id={items.field3.id}
             name={items.field3.id}
             type={items.field3.type}

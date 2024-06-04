@@ -16,6 +16,8 @@ export const DataContext = createContext(
     addOnsRef: RefObject<HTMLDivElement>;
     summaryRef: RefObject<HTMLDivElement>;
     nameRef: RefObject<HTMLInputElement>;
+    mailRef: RefObject<HTMLInputElement>;
+    telRef: RefObject<HTMLInputElement>;
   },
 );
 
@@ -25,6 +27,8 @@ export default function DataProvider({ children }: { children: ReactNode }) {
   const addOnsRef = useRef<HTMLDivElement>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
+  const mailRef = useRef<HTMLInputElement>(null);
+  const telRef = useRef<HTMLInputElement>(null);
 
   return (
     <DataContext.Provider
@@ -34,6 +38,8 @@ export default function DataProvider({ children }: { children: ReactNode }) {
         addOnsRef,
         summaryRef,
         nameRef,
+        mailRef,
+        telRef,
       }}
     >
       {children}

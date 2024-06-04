@@ -6,7 +6,7 @@ import imageSidebarDesktop from '@/public/assets/images/bg-sidebar-desktop.svg';
 import { Steps } from '@/app/_providers/DataContext';
 
 export default function LayoutHome({ children }: { children: ReactNode }) {
-  const { yourInfoRef, selectPlanRef, addOnsRef, summaryRef, nameRef } = useContext(DataContext);
+  const { yourInfoRef, selectPlanRef, addOnsRef, summaryRef, nameRef, mailRef, telRef } = useContext(DataContext);
   const refArray = ['circle1', 'circle2', 'circle3', 'circle4'];
 
   const previousButtonRef = useRef<HTMLButtonElement>(null);
@@ -92,11 +92,41 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
               ref={nextButtonRef}
               onClick={() => {
                 if (yourInfoRef.current?.classList.contains('selected')) {
+                  let error = false;
+                  if (telRef.current?.value === '') {
+                    telRef.current.classList.add('errorInput');
+                    telRef.current.focus();
+                    error = true;
+                  }
+                  let telFormatted = telRef.current?.value;
+                  if (telFormatted) {
+                    telFormatted = telFormatted.replaceAll(' ', '');
+                    telFormatted = telFormatted.replaceAll('-', '');
+                    telFormatted = telFormatted.replaceAll('+', '');
+                    telFormatted = telFormatted.replaceAll('(', '');
+                    telFormatted = telFormatted.replaceAll(')', '');
+                  }
+                  if (telRef.current && telFormatted && !/^\d{7,15}$/.test(telFormatted)) {
+                    telRef.current.classList.add('errorInput');
+                    telRef.current.focus();
+                    error = true;
+                  }
+                  if (mailRef.current?.value === '') {
+                    mailRef.current.classList.add('errorInput');
+                    mailRef.current.focus();
+                    error = true;
+                  }
+                  if (mailRef.current && !/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/.test(mailRef.current.value)) {
+                    mailRef.current.classList.add('errorInput');
+                    mailRef.current.focus();
+                    error = true;
+                  }
                   if (nameRef.current?.value === '') {
                     nameRef.current.classList.add('errorInput');
                     nameRef.current.focus();
-                    return;
+                    error = true;
                   }
+                  if (error) return;
                   previousButtonRef.current?.classList.remove('invisible');
                   yourInfoRef.current.classList.remove('selected');
                   yourInfoRef.current.classList.add('hidden');
