@@ -60,11 +60,11 @@ input[type='radio'] {
   @apply flex w-[138px] cursor-pointer flex-col gap-[39px] rounded-[8px] border border-[#D6D9E6] pb-[16px] pl-[24px] pt-[20px]  hover:border-[#483EFF];
 }
 
-.checkParent:has(input:focus) {
+.checkParent:has(input:focus-visible) {
   @apply border-[#483EFF];
 }
 
-.radioParent:has(input:focus) {
+.radioParent:has(input:focus-visible) {
   @apply border-[#483EFF];
 }
 

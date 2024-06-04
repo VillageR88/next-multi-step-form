@@ -57,7 +57,7 @@ export default function Addons() {
           <li className="flex" key={index}>
             <label htmlFor={field.id} className="checkParent group flex items-center gap-[24px] px-[24px]">
               <input title={undefined} id={field.id} className="absolute size-0" type="checkbox" />
-              <div className="flex size-[20px] select-none items-center justify-center rounded-[4px] border border-[#D6D9E6] bg-transparent group-has-[input:checked]:border-[#483EFF] group-has-[input:checked]:bg-[#483EFF]">
+              <div className="flex h-[20px] min-w-[20px] select-none items-center justify-center rounded-[4px] border border-[#D6D9E6] bg-transparent group-has-[input:checked]:border-[#483EFF] group-has-[input:checked]:bg-[#483EFF]">
                 <Image
                   alt="checkbox"
                   className="h-[9px] w-[12px]"
@@ -71,7 +71,7 @@ export default function Addons() {
                   <h2>{field.title}</h2>
                   <p>{field.description}</p>
                 </div>
-                <span className="leadin-[20px] text-[14px] text-[#483EFF]">{field.costMonthly}</span>
+                <span className="text-[14px] leading-[20px] text-[#483EFF]">{field.costMonthly}</span>
               </div>
             </label>
           </li>
