@@ -55,7 +55,7 @@ export default function Addons() {
       <ul className="flex flex-col gap-[16px]">
         {items.fields.map((field, index) => (
           <li className="flex" key={index}>
-            <label htmlFor={field.id} className="checkParent group flex items-center px-[24px]">
+            <label htmlFor={field.id} className="checkParent group flex items-center gap-[24px] px-[24px]">
               <input title={undefined} id={field.id} className="absolute size-0" type="checkbox" />
               <div className="flex size-[20px] select-none items-center justify-center rounded-[4px] border border-[#D6D9E6] bg-transparent group-has-[input:checked]:border-[#483EFF] group-has-[input:checked]:bg-[#483EFF]">
                 <Image
@@ -65,6 +65,13 @@ export default function Addons() {
                   height={9}
                   src={imageCheckmark as string}
                 />
+              </div>
+              <div className="flex w-full items-center justify-between">
+                <div className="flex flex-col gap-[7px]">
+                  <h2>{field.title}</h2>
+                  <p>{field.description}</p>
+                </div>
+                <span className="leadin-[20px] text-[14px] text-[#483EFF]">{field.costMonthly}</span>
               </div>
             </label>
           </li>
