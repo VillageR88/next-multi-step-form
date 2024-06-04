@@ -1,4 +1,13 @@
-export default function YourInfo({ visibility }: { visibility: string }) {
+'use client';
+import { Steps } from '@/app/_providers/DataContext';
+import { useEffect, useContext, useRef } from 'react';
+import { DataContext } from '@/app/_providers/DataContext';
+export default function YourInfo() {
+  const field1Ref = useRef<HTMLInputElement>(null);
+  const field2Ref = useRef<HTMLInputElement>(null);
+  const field3Ref = useRef<HTMLInputElement>(null);
+  const thisStepName = Steps.YOUR_INFO;
+  const { currentStep, handleCheck, setHandleCheck } = useContext(DataContext);
   const items = {
     title: 'Personal info',
     description: 'Please provide your name, email address, and phone number.',
@@ -21,8 +30,25 @@ export default function YourInfo({ visibility }: { visibility: string }) {
       type: 'tel',
     },
   };
+  useEffect(() => {
+    if (handleCheck) {
+      const validate = () => {
+        const name = field1Ref.current?.value;
+        const email = field2Ref.current?.value;
+        const tel = field3Ref.current?.value;
+        if (name && email && tel) {
+          console.log('All fields are filled');
+        }
+      };
+      validate();
+      setHandleCheck(false);
+    }
+  }, [handleCheck, setHandleCheck]);
+
   return (
-    <div className={`mt-[40px] flex h-[348px] w-full max-w-[450px] flex-col gap-[40px] ${visibility}`}>
+    <div
+      className={`mt-[40px] flex h-[348px] w-full max-w-[450px] flex-col gap-[40px] ${currentStep === thisStepName ? 'block' : 'hidden'}`}
+    >
       <header className="flex h-[68px] flex-col gap-[11px]">
         <h1>{items.title}</h1>
         <p>{items.description}</p>
@@ -31,6 +57,7 @@ export default function YourInfo({ visibility }: { visibility: string }) {
         <div className="inputDiv">
           <label htmlFor={items.field1.id}>{items.field1.label}</label>
           <input
+            ref={field1Ref}
             id={items.field1.id}
             name={items.field1.id}
             type={items.field1.type}
@@ -40,6 +67,7 @@ export default function YourInfo({ visibility }: { visibility: string }) {
         <div className="inputDiv">
           <label htmlFor={items.field2.id}>{items.field2.label}</label>
           <input
+            ref={field2Ref}
             id={items.field2.id}
             name={items.field2.id}
             type={items.field2.type}
@@ -49,6 +77,7 @@ export default function YourInfo({ visibility }: { visibility: string }) {
         <div className="inputDiv">
           <label htmlFor={items.field3.id}>{items.field3.label}</label>
           <input
+            ref={field3Ref}
             id={items.field3.id}
             name={items.field3.id}
             type={items.field3.type}

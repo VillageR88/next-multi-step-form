@@ -6,7 +6,7 @@ import imageSidebarDesktop from '@/public/assets/images/bg-sidebar-desktop.svg';
 import { Steps } from '@/app/_providers/DataContext';
 
 export default function LayoutHome({ children }: { children: ReactNode }) {
-  const { stageCheck, currentStep, setCurrentStep } = useContext(DataContext);
+  const { setHandleCheck, currentStep, setCurrentStep } = useContext(DataContext);
   const circleDisplay = {
     normal: 'text-white border-white',
     selected: 'text-[#022959] bg-[#BEE2FD] border-[#BEE2FD]',
@@ -62,10 +62,7 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
             </button>
             <button
               onClick={() => {
-                const currentIndex = items.indexOf(currentStep);
-                if (currentIndex < items.length - 1 && stageCheck[currentIndex]) {
-                  setCurrentStep(items[currentIndex + 1]);
-                }
+                setHandleCheck(true);
               }}
               type="button"
               className="h-[48px] w-[123px] rounded-[8px] bg-[#022959] text-white"
