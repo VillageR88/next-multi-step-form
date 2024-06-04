@@ -18,13 +18,18 @@ const RadioInput = ({
   description: string;
   src: string;
 }) => {
+  const discount = '2 months free';
+
   return (
     <label className="radioParent">
       <input className="absolute size-0" required type="radio" id={id} name="queryType" />
       <Image src={src} width={40} height={40} className="size-[40px]" alt="icon" />
       <div className="flex flex-col">
         <h2>{title}</h2>
-        <p>{description}</p>
+        <p className="leading-[29px]">{description}</p>
+        <p className="text-[12px] text-[#022959] group-has-[input[type='checkbox']:not(:checked)]/1:hidden">
+          {discount}
+        </p>
       </div>
     </label>
   );
@@ -64,13 +69,13 @@ export default function SelectPlan() {
 
   return (
     <div
-      className={`mt-[40px] flex h-[348px] w-full max-w-[450px] flex-col gap-[40px] ${currentStep === thisStepName ? 'block' : 'hidden'}`}
+      className={`group/1 mt-[40px] flex h-[348px] w-full max-w-[450px] flex-col gap-[40px] ${currentStep === thisStepName ? 'block' : 'hidden'}`}
     >
       <header className="flex h-[68px] flex-col gap-[11px]">
         <h1>{items.title}</h1>
         <p>{items.description}</p>
       </header>
-      <div className="flex flex-col gap-[32px]">
+      <div className=" flex flex-col gap-[32px]">
         <ul className="flex gap-[24px]">
           {items.fields.map((field, index) => (
             <li key={index}>
@@ -78,10 +83,10 @@ export default function SelectPlan() {
             </li>
           ))}
         </ul>
-        <div className="group flex h-[48px] items-center justify-center gap-[24px] rounded-[8px] bg-[#F8F9FF] *:cursor-pointer">
+        <div className="group/2 flex h-[48px] items-center justify-center gap-[24px] rounded-[8px] bg-[#F8F9FF] *:cursor-pointer">
           <label
             htmlFor="billing"
-            className="h3Label select-none text-[#022959] active:cursor-default group-has-[input:not(:checked)]:pointer-events-none group-has-[input:checked]:text-[#9699AA]"
+            className="h3Label select-none text-[#022959] active:cursor-default group-has-[input:not(:checked)]/2:pointer-events-none group-has-[input:checked]/2:text-[#9699AA]"
           >
             {billingType.monthly}
           </label>
@@ -99,7 +104,7 @@ export default function SelectPlan() {
           </label>
           <label
             htmlFor="billing"
-            className="h3Label select-none text-[#9699AA] active:cursor-default group-has-[input:checked]:pointer-events-none group-has-[input:checked]:text-[#022959]"
+            className="h3Label select-none text-[#9699AA] active:cursor-default group-has-[input:checked]/2:pointer-events-none group-has-[input:checked]/2:text-[#022959]"
           >
             {billingType.yearly}
           </label>
