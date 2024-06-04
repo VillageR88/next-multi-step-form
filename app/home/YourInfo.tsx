@@ -37,7 +37,6 @@ export default function YourInfo() {
         const email = field2Ref.current?.value;
         const tel = field3Ref.current?.value;
         if (name && email && tel) {
-          console.log('Your Info:', name, email, tel);
           setCurrentStep(Steps.SELECT_PLAN);
         }
       };
@@ -63,6 +62,7 @@ export default function YourInfo() {
             name={items.field1.id}
             type={items.field1.type}
             placeholder={items.field1.placeholder}
+            autoComplete="name"
           />
         </div>
         <div className="inputDiv">
@@ -73,6 +73,7 @@ export default function YourInfo() {
             name={items.field2.id}
             type={items.field2.type}
             placeholder={items.field2.placeholder}
+            autoComplete="email"
           />
         </div>
         <div className="inputDiv">
@@ -83,6 +84,7 @@ export default function YourInfo() {
             name={items.field3.id}
             type={items.field3.type}
             placeholder={items.field3.placeholder}
+            autoComplete="tel"
           />
         </div>
       </div>

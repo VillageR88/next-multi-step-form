@@ -22,19 +22,36 @@ h1 {
   @apply text-[32px] font-bold text-[#022959];
 }
 
+h2 {
+  @apply text-[16px] font-medium text-[#022959];
+}
+
+p {
+  @apply text-[14px] font-normal text-[#9699AA];
+}
+
 label {
   @apply text-[14px] text-[#022959];
 }
 
-p {
-  @apply text-[16px] leading-[25px] text-[#022959];
+input[type='text'],
+input[type='email'],
+input[type='tel'] {
+  @apply h-[48px] w-full rounded-[8px] px-[16px] text-[16px] font-medium leading-[25px] text-[#022959] outline outline-1 outline-[#D6D9E6] placeholder:text-[#9699AA] focus:outline-[#483EFF];
 }
 
-input {
-  @apply h-[48px] focus:outline-[#483EFF] w-full rounded-[8px] text-[#022959] px-[16px] text-[16px] font-medium leading-[25px] outline outline-1 outline-[#D6D9E6] placeholder:text-[#9699AA];
+input[type='radio'] {
+  @apply appearance-none outline-none;
+}
+
+.radioParent:has(input[type='radio']:checked) {
+  @apply bg-[#F8F9FF] outline-[#483EFF] transition;
+}
+
+.radioParent {
+  @apply flex w-[138px] cursor-pointer pb-[16px] flex-col gap-[39px] rounded-[8px] pl-[24px] pt-[20px] outline outline-1 outline-[#D6D9E6] transition hover:outline-[#483EFF];
 }
 
 .inputDiv {
   @apply flex flex-col gap-[8px];
 }
-
