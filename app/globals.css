@@ -79,3 +79,23 @@ input[type='radio'] {
 .addonCost {
   @apply text-[14px] leading-[20px] text-[#483EFF];
 }
+
+.normal {
+  @apply border-white text-white;
+}
+
+.circle1 {
+  @apply group-has-[.yourInfo.selected]/home:border-[#BEE2FD] group-has-[.yourInfo.selected]/home:bg-[#BEE2FD] group-has-[.yourInfo.selected]/home:text-[#022959];
+}
+
+.circle2 {
+  @apply group-has-[.selectPlan.selected]/home:border-[#BEE2FD] group-has-[.selectPlan.selected]/home:bg-[#BEE2FD] group-has-[.selectPlan.selected]/home:text-[#022959];
+}
+
+.circle3 {
+  @apply group-has-[.addons.selected]/home:border-[#BEE2FD] group-has-[.addons.selected]/home:bg-[#BEE2FD] group-has-[.addons.selected]/home:text-[#022959];
+}
+
+.circle4 {
+  @apply group-has-[.summary.selected]/home:border-[#BEE2FD] group-has-[.summary.selected]/home:bg-[#BEE2FD] group-has-[.summary.selected]/home:text-[#022959];
+}

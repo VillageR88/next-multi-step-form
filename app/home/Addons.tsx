@@ -1,20 +1,11 @@
 'use client';
-import { Steps } from '@/app/_providers/DataContext';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
 import Image from 'next/image';
 import imageCheckmark from '@/public/assets/images/icon-checkmark.svg';
 
 export default function Addons() {
-  const thisStepName = Steps.ADD_ONS;
-
-  const { currentStep, handleCheck, setCurrentStep, setHandleCheck } = useContext(DataContext);
-  useEffect(() => {
-    if (handleCheck && currentStep === thisStepName) {
-      setCurrentStep(Steps.ADD_ONS);
-      setHandleCheck(false);
-    }
-  }, [currentStep, handleCheck, setCurrentStep, setHandleCheck, thisStepName]);
+  const { addOnsRef } = useContext(DataContext);
 
   const items = {
     title: 'Pick add-ons',
@@ -46,7 +37,8 @@ export default function Addons() {
 
   return (
     <div
-      className={`group/1 mt-[40px] flex h-[348px] w-full max-w-[450px] flex-col gap-[40px] ${currentStep === thisStepName ? 'block' : 'hidden'}`}
+      ref={addOnsRef}
+      className={`group/1 addons mt-[40px] hidden h-[348px] w-full max-w-[450px] flex-col gap-[40px]`}
     >
       <header className="flex h-[68px] flex-col gap-[11px]">
         <h1>{items.title}</h1>

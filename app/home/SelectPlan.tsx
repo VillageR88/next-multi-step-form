@@ -1,6 +1,5 @@
 'use client';
-import { Steps } from '@/app/_providers/DataContext';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
 import Image from 'next/image';
 import imageArcade from '@/public/assets/images/icon-arcade.svg';
@@ -39,14 +38,7 @@ const RadioInput = ({
 };
 
 export default function SelectPlan() {
-  const thisStepName = Steps.SELECT_PLAN;
-  const { currentStep, handleCheck, setCurrentStep, setHandleCheck } = useContext(DataContext);
-  useEffect(() => {
-    if (handleCheck && currentStep === thisStepName) {
-      setCurrentStep(Steps.ADD_ONS);
-      setHandleCheck(false);
-    }
-  }, [currentStep, handleCheck, setCurrentStep, setHandleCheck, thisStepName]);
+  const { selectPlanRef } = useContext(DataContext);
 
   const items = {
     title: 'Select your plan',
@@ -82,7 +74,8 @@ export default function SelectPlan() {
 
   return (
     <div
-      className={`group/1 mt-[40px] flex h-[348px] w-full max-w-[450px] flex-col gap-[40px] ${currentStep === thisStepName ? 'block' : 'hidden'}`}
+      ref={selectPlanRef}
+      className={`group/1 selectPlan mt-[40px] hidden h-[348px] w-full max-w-[450px] flex-col gap-[40px]`}
     >
       <header className="flex h-[68px] flex-col gap-[11px]">
         <h1>{items.title}</h1>
@@ -115,7 +108,7 @@ export default function SelectPlan() {
           >
             <input
               title={undefined}
-              className="billingMethod size-[12px] -translate-x-2 cursor-pointer appearance-none rounded-full bg-white transition checked:translate-x-2"
+              className="size-[12px] -translate-x-2 cursor-pointer appearance-none rounded-full bg-white transition checked:translate-x-2"
               type="checkbox"
               id="billing"
               name="billing"

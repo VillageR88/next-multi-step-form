@@ -2,6 +2,7 @@ import LayoutHome from './home/layout';
 import YourInfo from './home/YourInfo';
 import SelectPlan from './home/SelectPlan';
 import Addons from './home/Addons';
+import Summary from './home/Summary';
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <YourInfo />
       <SelectPlan />
       <Addons />
+      <Summary />
     </LayoutHome>
   );
 }

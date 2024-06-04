@@ -1,13 +1,12 @@
 'use client';
-import { Steps } from '@/app/_providers/DataContext';
-import { useEffect, useContext, useRef } from 'react';
+import { useContext, useRef } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
 export default function YourInfo() {
   const field1Ref = useRef<HTMLInputElement>(null);
   const field2Ref = useRef<HTMLInputElement>(null);
   const field3Ref = useRef<HTMLInputElement>(null);
-  const thisStepName = Steps.YOUR_INFO;
-  const { currentStep, handleCheck, setHandleCheck, setCurrentStep } = useContext(DataContext);
+  //const thisStepName = Steps.YOUR_INFO;
+  const { yourInfoRef } = useContext(DataContext);
   const items = {
     title: 'Personal info',
     description: 'Please provide your name, email address, and phone number.',
@@ -30,24 +29,11 @@ export default function YourInfo() {
       type: 'tel',
     },
   };
-  useEffect(() => {
-    if (handleCheck && currentStep === thisStepName) {
-      const validate = () => {
-        const name = field1Ref.current?.value;
-        const email = field2Ref.current?.value;
-        const tel = field3Ref.current?.value;
-        if (name && email && tel) {
-          setCurrentStep(Steps.SELECT_PLAN);
-          setHandleCheck(false);
-        }
-      };
-      validate();
-    }
-  }, [currentStep, handleCheck, setCurrentStep, setHandleCheck, thisStepName]);
 
   return (
     <div
-      className={`mt-[40px] flex h-[348px] w-full max-w-[450px] flex-col gap-[40px] ${currentStep === thisStepName ? 'block' : 'hidden'}`}
+      ref={yourInfoRef}
+      className="yourInfo selected mt-[40px] flex h-[348px] w-full max-w-[450px] flex-col gap-[40px]"
     >
       <header className="flex h-[68px] flex-col gap-[11px]">
         <h1>{items.title}</h1>
