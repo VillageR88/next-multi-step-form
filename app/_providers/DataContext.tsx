@@ -15,6 +15,7 @@ export const DataContext = createContext(
     selectPlanRef: RefObject<HTMLDivElement>;
     addOnsRef: RefObject<HTMLDivElement>;
     summaryRef: RefObject<HTMLDivElement>;
+    nameRef: RefObject<HTMLInputElement>;
   },
 );
 
@@ -23,6 +24,7 @@ export default function DataProvider({ children }: { children: ReactNode }) {
   const selectPlanRef = useRef<HTMLDivElement>(null);
   const addOnsRef = useRef<HTMLDivElement>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
 
   return (
     <DataContext.Provider
@@ -31,6 +33,7 @@ export default function DataProvider({ children }: { children: ReactNode }) {
         selectPlanRef,
         addOnsRef,
         summaryRef,
+        nameRef,
       }}
     >
       {children}

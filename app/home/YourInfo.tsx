@@ -2,11 +2,10 @@
 import { useContext, useRef } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
 export default function YourInfo() {
-  const field1Ref = useRef<HTMLInputElement>(null);
   const field2Ref = useRef<HTMLInputElement>(null);
   const field3Ref = useRef<HTMLInputElement>(null);
   //const thisStepName = Steps.YOUR_INFO;
-  const { yourInfoRef } = useContext(DataContext);
+  const { yourInfoRef, nameRef } = useContext(DataContext);
   const items = {
     title: 'Personal info',
     description: 'Please provide your name, email address, and phone number.',
@@ -43,7 +42,8 @@ export default function YourInfo() {
         <div className="inputDiv">
           <label htmlFor={items.field1.id}>{items.field1.label}</label>
           <input
-            ref={field1Ref}
+            onChange={() => nameRef.current?.classList.remove('errorInput')}
+            ref={nameRef}
             id={items.field1.id}
             name={items.field1.id}
             type={items.field1.type}

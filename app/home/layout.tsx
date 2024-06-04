@@ -6,7 +6,7 @@ import imageSidebarDesktop from '@/public/assets/images/bg-sidebar-desktop.svg';
 import { Steps } from '@/app/_providers/DataContext';
 
 export default function LayoutHome({ children }: { children: ReactNode }) {
-  const { yourInfoRef, selectPlanRef, addOnsRef, summaryRef } = useContext(DataContext);
+  const { yourInfoRef, selectPlanRef, addOnsRef, summaryRef, nameRef } = useContext(DataContext);
   const refArray = ['circle1', 'circle2', 'circle3', 'circle4'];
 
   const previousButtonRef = useRef<HTMLButtonElement>(null);
@@ -55,7 +55,7 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
           <div className="flex h-[48px] w-full items-center justify-between">
             <button
               onClick={() => {
-                if (selectPlanRef.current?.classList.contains('flex')) {
+                if (selectPlanRef.current?.classList.contains('selected')) {
                   previousButtonRef.current?.classList.add('invisible');
                   selectPlanRef.current.classList.remove('selected');
                   selectPlanRef.current.classList.add('hidden');
@@ -65,7 +65,7 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
                   yourInfoRef.current?.classList.add('flex');
                   nextButtonRef.current?.classList.remove('invisible');
                 }
-                if (addOnsRef.current?.classList.contains('flex')) {
+                if (addOnsRef.current?.classList.contains('selected')) {
                   addOnsRef.current.classList.remove('selected');
                   addOnsRef.current.classList.add('hidden');
                   addOnsRef.current.classList.remove('flex');
@@ -73,7 +73,7 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
                   selectPlanRef.current?.classList.remove('hidden');
                   selectPlanRef.current?.classList.add('flex');
                 }
-                if (summaryRef.current?.classList.contains('flex')) {
+                if (summaryRef.current?.classList.contains('selected')) {
                   summaryRef.current.classList.remove('selected');
                   summaryRef.current.classList.add('hidden');
                   summaryRef.current.classList.remove('flex');
@@ -91,7 +91,12 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
             <button
               ref={nextButtonRef}
               onClick={() => {
-                if (yourInfoRef.current?.classList.contains('flex')) {
+                if (yourInfoRef.current?.classList.contains('selected')) {
+                  if (nameRef.current?.value === '') {
+                    nameRef.current.classList.add('errorInput');
+                    nameRef.current.focus();
+                    return;
+                  }
                   previousButtonRef.current?.classList.remove('invisible');
                   yourInfoRef.current.classList.remove('selected');
                   yourInfoRef.current.classList.add('hidden');
@@ -99,14 +104,14 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
                   selectPlanRef.current?.classList.add('selected');
                   selectPlanRef.current?.classList.remove('hidden');
                   selectPlanRef.current?.classList.add('flex');
-                } else if (selectPlanRef.current?.classList.contains('flex')) {
+                } else if (selectPlanRef.current?.classList.contains('selected')) {
                   selectPlanRef.current.classList.remove('selected');
                   selectPlanRef.current.classList.add('hidden');
                   selectPlanRef.current.classList.remove('flex');
                   addOnsRef.current?.classList.add('selected');
                   addOnsRef.current?.classList.remove('hidden');
                   addOnsRef.current?.classList.add('flex');
-                } else if (addOnsRef.current?.classList.contains('flex')) {
+                } else if (addOnsRef.current?.classList.contains('selected')) {
                   addOnsRef.current.classList.remove('selected');
                   addOnsRef.current.classList.add('hidden');
                   addOnsRef.current.classList.remove('flex');
