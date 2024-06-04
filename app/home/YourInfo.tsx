@@ -7,7 +7,7 @@ export default function YourInfo() {
   const field2Ref = useRef<HTMLInputElement>(null);
   const field3Ref = useRef<HTMLInputElement>(null);
   const thisStepName = Steps.YOUR_INFO;
-  const { currentStep, handleCheck, setHandleCheck } = useContext(DataContext);
+  const { currentStep, handleCheck, setHandleCheck, setCurrentStep } = useContext(DataContext);
   const items = {
     title: 'Personal info',
     description: 'Please provide your name, email address, and phone number.',
@@ -31,19 +31,20 @@ export default function YourInfo() {
     },
   };
   useEffect(() => {
-    if (handleCheck) {
+    if (handleCheck && currentStep === thisStepName) {
       const validate = () => {
         const name = field1Ref.current?.value;
         const email = field2Ref.current?.value;
         const tel = field3Ref.current?.value;
         if (name && email && tel) {
-          console.log('All fields are filled');
+          console.log('Your Info:', name, email, tel);
+          setCurrentStep(Steps.SELECT_PLAN);
         }
       };
       validate();
       setHandleCheck(false);
     }
-  }, [handleCheck, setHandleCheck]);
+  }, [currentStep, handleCheck, setCurrentStep, setHandleCheck, thisStepName]);
 
   return (
     <div
