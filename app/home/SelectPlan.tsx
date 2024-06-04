@@ -10,12 +10,14 @@ import imagePro from '@/public/assets/images/icon-pro.svg';
 const RadioInput = ({
   id,
   title,
-  description,
+  descriptionMonthly,
+  descriptionYearly,
   src,
 }: {
   id: string;
   title: string;
-  description: string;
+  descriptionMonthly: string;
+  descriptionYearly: string;
   src: string;
 }) => {
   const discount = '2 months free';
@@ -26,7 +28,8 @@ const RadioInput = ({
       <Image src={src} width={40} height={40} className="size-[40px]" alt="icon" />
       <div className="flex flex-col">
         <h2>{title}</h2>
-        <p className="leading-[29px]">{description}</p>
+        <p className="leading-[29px] group-has-[input[type='checkbox']:checked]/1:hidden">{descriptionMonthly}</p>
+        <p className="leading-[29px] group-has-[input[type='checkbox']:not(:checked)]/1:hidden">{descriptionYearly}</p>
         <p className="text-[12px] text-[#022959] group-has-[input[type='checkbox']:not(:checked)]/1:hidden">
           {discount}
         </p>
@@ -37,7 +40,6 @@ const RadioInput = ({
 
 export default function SelectPlan() {
   const thisStepName = Steps.SELECT_PLAN;
-
   const { currentStep, handleCheck, setCurrentStep, setHandleCheck } = useContext(DataContext);
   useEffect(() => {
     if (handleCheck && currentStep === thisStepName) {
@@ -53,19 +55,22 @@ export default function SelectPlan() {
       {
         id: 'arcade',
         title: 'Arcade',
-        description: '$9/mo',
+        descriptionMonthly: '$9/mo',
+        descriptionYearly: '$90/yr',
         src: imageArcade as string,
       },
       {
         id: 'advanced',
         title: 'Advanced',
-        description: '$12/mo',
+        descriptionMonthly: '$12/mo',
+        descriptionYearly: '$120/yr',
         src: imageAdvanced as string,
       },
       {
         id: 'pro',
         title: 'Pro',
-        description: '$15/mo',
+        descriptionMonthly: '$15/mo',
+        descriptionYearly: '$150/yr',
         src: imagePro as string,
       },
     ],
@@ -87,7 +92,13 @@ export default function SelectPlan() {
         <ul className="flex gap-[24px]">
           {items.fields.map((field, index) => (
             <li key={index}>
-              <RadioInput id={field.id} title={field.title} description={field.description} src={field.src} />
+              <RadioInput
+                id={field.id}
+                title={field.title}
+                descriptionMonthly={field.descriptionMonthly}
+                descriptionYearly={field.descriptionYearly}
+                src={field.src}
+              />
             </li>
           ))}
         </ul>
