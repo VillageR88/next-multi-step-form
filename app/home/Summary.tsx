@@ -25,19 +25,24 @@ export default function Summary() {
     },
     addons: {
       onlineService: {
+        id: 'onlineService',
         title: 'Online service',
+        condition: addons.onlineService.checked,
       },
       largerStorage: {
+        id: 'largerStorage',
         title: 'Larger storage',
+        condition: addons.largerStorage.checked,
       },
       customizableProfile: {
+        id: 'customizableProfile',
         title: 'Customizable profile',
+        condition: addons.customizableProfile.checked,
       },
     },
   };
 
   const billingText = billing ? items.billing.yearly : items.billing.monthly;
-
   return (
     <div
       ref={summaryRef}
@@ -74,15 +79,24 @@ export default function Summary() {
             })}
           </p>
         </div>
-        {(addons.onlineService || addons.largerStorage || addons.customizableProfile) && (
+        {(addons.onlineService.checked || addons.largerStorage.checked || addons.customizableProfile.checked) && (
           <div className="flex flex-col gap-[16px] text-[14px] text-[#9699AA]">
             <div className="h-px w-full bg-[#9699AA]/20"></div>
-            {addons.onlineService && <div>{items.addons.onlineService.title}</div>}
-            {addons.largerStorage && <div>{items.addons.largerStorage.title}</div>}
-            {addons.customizableProfile && <div>{items.addons.customizableProfile.title}</div>}
+            {Object.keys(items.addons).map((key) => {
+              const addon = items.addons[key as keyof typeof items.addons];
+              return (
+                addon.condition && (
+                  <div key={key} className="flex justify-between">
+                    <p>{addon.title}</p>
+                    <p className="text-[#022959]">{Object.entries(addons).filter((x) => x[0] === key)[0][1].cost}</p>
+                  </div>
+                )
+              );
+            })}
           </div>
         )}
       </div>
     </div>
   );
 }
+//Object.entries(addons).filter((x) => x[0] === key)[0][1].cost

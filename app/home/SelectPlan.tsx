@@ -1,6 +1,6 @@
 'use client';
 import { useContext } from 'react';
-import { DataContext, costFormatted } from '@/app/_providers/DataContext';
+import { DataContext, costFormatted, tAddons } from '@/app/_providers/DataContext';
 import { Plan } from '@/app/_providers/DataContext';
 import Image from 'next/image';
 import imageArcade from '@/public/assets/images/icon-arcade.svg';
@@ -53,7 +53,7 @@ const RadioInput = ({
 };
 
 export default function SelectPlan() {
-  const { selectPlanRef, billing, setBilling, setPlan } = useContext(DataContext);
+  const { selectPlanRef, billing, setBilling, setPlan, setAddons } = useContext(DataContext);
   const items = {
     title: 'Select your plan',
     description: 'You have the option of monthly or yearly billing.',
@@ -128,12 +128,28 @@ export default function SelectPlan() {
                 setPlan((prev) => {
                   if (!prev) return;
                   const newPrev = { ...prev } as [Plan, number];
-                  if (!newPrev[1]) return;
                   newPrev[1] = billing
                     ? items.fields.find((field) => field.id === (prev[0] as string))?.costMonthly ?? 0
                     : items.fields.find((field) => field.id === (prev[0] as string))?.costYearly ?? 0;
                   return newPrev;
                 });
+                setAddons(
+                  (prev: tAddons) =>
+                    ({
+                      onlineService: {
+                        checked: prev.onlineService.checked,
+                        cost: billing ? 1 : 10,
+                      },
+                      largerStorage: {
+                        checked: prev.largerStorage.checked,
+                        cost: billing ? 1 : 10,
+                      },
+                      customizableProfile: {
+                        checked: prev.customizableProfile.checked,
+                        cost: billing ? 2 : 20,
+                      },
+                    }) as tAddons,
+                );
               }}
               title={undefined}
               className="size-[12px] -translate-x-2 cursor-pointer appearance-none rounded-full bg-white transition checked:translate-x-2"

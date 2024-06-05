@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
 import Image from 'next/image';
 import imageCheckmark from '@/public/assets/images/icon-checkmark.svg';
+import type { tAddons } from '@/app/_providers/DataContext';
 
 export default function Addons() {
   const { addOnsRef, billing, setAddons } = useContext(DataContext);
@@ -15,24 +16,28 @@ export default function Addons() {
         id: 'onlineService',
         title: 'Online service',
         description: 'Access to multiplayer games',
-        costMonthly: '+$1/mo',
-        costYearly: '+$10/yr',
+        costMonthly: 1,
       },
       {
         id: 'largerStorage',
         title: 'Larger storage',
         description: 'Extra 1TB of cloud save',
-        costMonthly: '+$2/mo',
-        costYearly: '+$20/yr',
+        costMonthly: 1,
       },
       {
         id: 'customizableProfile',
         title: 'Customizable profile',
         description: 'Custom theme on your profile',
-        costMonthly: '+$2/mo',
-        costYearly: '+$20/yr',
+        costMonthly: 2,
       },
     ],
+  };
+
+  const formatCost = (cost: number) => {
+    const amount = billing ? cost * 10 : cost;
+    const prefix = '+$';
+    const appendix = billing ? '/yr' : '/mo';
+    return `${prefix}${amount.toString()}${appendix}`;
   };
 
   return (
@@ -50,7 +55,16 @@ export default function Addons() {
             <label htmlFor={field.id} className="checkParent group flex items-center gap-[24px] px-[24px]">
               <input
                 onChange={(e) => {
-                  setAddons((prev) => ({ ...prev, [field.id]: e.target.checked }));
+                  setAddons(
+                    (prev: tAddons) =>
+                      ({
+                        ...prev,
+                        [field.id]: {
+                          checked: e.target.checked,
+                          cost: billing ? field.costMonthly * 10 : field.costMonthly,
+                        },
+                      }) as tAddons,
+                  );
                 }}
                 title={undefined}
                 id={field.id}
@@ -71,7 +85,7 @@ export default function Addons() {
                   <h2>{field.title}</h2>
                   <p>{field.description}</p>
                 </div>
-                <span className="addonCost">{billing ? field.costYearly : field.costMonthly}</span>
+                <span className="addonCost">{formatCost(field.costMonthly)}</span>
               </div>
             </label>
           </li>

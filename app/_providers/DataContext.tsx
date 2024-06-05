@@ -14,6 +14,12 @@ export enum Plan {
   PRO = 'pro',
 }
 
+export interface tAddons {
+  onlineService: { checked: boolean; cost: number };
+  largerStorage: { checked: boolean; cost: number };
+  customizableProfile: { checked: boolean; cost: number };
+}
+
 export const costFormatted = ({
   cost,
   billing,
@@ -42,15 +48,15 @@ export const DataContext = createContext(
     plan: [Plan, number] | undefined;
     setPlan: Dispatch<SetStateAction<[Plan, number] | undefined>>;
     addons: {
-      onlineService: boolean;
-      largerStorage: boolean;
-      customizableProfile: boolean;
+      onlineService: { checked: boolean; cost: number };
+      largerStorage: { checked: boolean; cost: number };
+      customizableProfile: { checked: boolean; cost: number };
     };
     setAddons: Dispatch<
       SetStateAction<{
-        onlineService: boolean;
-        largerStorage: boolean;
-        customizableProfile: boolean;
+        onlineService: { checked: boolean; cost: number };
+        largerStorage: { checked: boolean; cost: number };
+        customizableProfile: { checked: boolean; cost: number };
       }>
     >;
   },
@@ -60,13 +66,13 @@ export default function DataProvider({ children }: { children: ReactNode }) {
   const [billing, setBilling] = useState(false);
   const [plan, setPlan] = useState<[Plan, number] | undefined>(undefined);
   const [addons, setAddons] = useState<{
-    onlineService: boolean;
-    largerStorage: boolean;
-    customizableProfile: boolean;
+    onlineService: { checked: boolean; cost: number };
+    largerStorage: { checked: boolean; cost: number };
+    customizableProfile: { checked: boolean; cost: number };
   }>({
-    onlineService: false,
-    largerStorage: false,
-    customizableProfile: false,
+    onlineService: { checked: false, cost: 1 },
+    largerStorage: { checked: false, cost: 2 },
+    customizableProfile: { checked: false, cost: 2 },
   });
 
   const yourInfoRef = useRef<HTMLDivElement>(null);
