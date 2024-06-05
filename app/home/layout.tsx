@@ -55,31 +55,35 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
           <div className="flex h-[48px] w-full items-center justify-between">
             <button
               onClick={() => {
-                if (selectPlanRef.current?.classList.contains('selected')) {
+                if (
+                  selectPlanRef.current &&
+                  selectPlanRef.current.classList.contains('selected') &&
+                  yourInfoRef.current
+                ) {
                   previousButtonRef.current?.classList.add('invisible');
                   selectPlanRef.current.classList.remove('selected');
                   selectPlanRef.current.classList.add('hidden');
                   selectPlanRef.current.classList.remove('flex');
-                  yourInfoRef.current?.classList.add('selected');
-                  yourInfoRef.current?.classList.remove('hidden');
-                  yourInfoRef.current?.classList.add('flex');
+                  yourInfoRef.current.classList.add('selected');
+                  yourInfoRef.current.classList.remove('hidden');
+                  yourInfoRef.current.classList.add('flex');
                   nextButtonRef.current?.classList.remove('invisible');
                 }
-                if (addOnsRef.current?.classList.contains('selected')) {
+                if (addOnsRef.current && addOnsRef.current.classList.contains('selected') && selectPlanRef.current) {
                   addOnsRef.current.classList.remove('selected');
                   addOnsRef.current.classList.add('hidden');
                   addOnsRef.current.classList.remove('flex');
-                  selectPlanRef.current?.classList.add('selected');
-                  selectPlanRef.current?.classList.remove('hidden');
-                  selectPlanRef.current?.classList.add('flex');
+                  selectPlanRef.current.classList.add('selected');
+                  selectPlanRef.current.classList.remove('hidden');
+                  selectPlanRef.current.classList.add('flex');
                 }
-                if (summaryRef.current?.classList.contains('selected')) {
+                if (summaryRef.current && summaryRef.current.classList.contains('selected') && addOnsRef.current) {
                   summaryRef.current.classList.remove('selected');
                   summaryRef.current.classList.add('hidden');
                   summaryRef.current.classList.remove('flex');
-                  addOnsRef.current?.classList.add('selected');
-                  addOnsRef.current?.classList.remove('hidden');
-                  addOnsRef.current?.classList.add('flex');
+                  addOnsRef.current.classList.add('selected');
+                  addOnsRef.current.classList.remove('hidden');
+                  addOnsRef.current.classList.add('flex');
                 }
               }}
               ref={previousButtonRef}
@@ -91,7 +95,11 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
             <button
               ref={nextButtonRef}
               onClick={() => {
-                if (yourInfoRef.current?.classList.contains('selected')) {
+                if (
+                  yourInfoRef.current &&
+                  yourInfoRef.current.classList.contains('selected') &&
+                  selectPlanRef.current
+                ) {
                   let error = false;
                   if (telRef.current?.value === '') {
                     telRef.current.classList.add('errorInput');
@@ -111,7 +119,7 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
                     telRef.current.focus();
                     error = true;
                   }
-                  if (mailRef.current?.value === '') {
+                  if (mailRef.current && mailRef.current.value === '') {
                     mailRef.current.classList.add('errorInput');
                     mailRef.current.focus();
                     error = true;
@@ -121,33 +129,34 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
                     mailRef.current.focus();
                     error = true;
                   }
-                  if (nameRef.current?.value === '') {
+                  if (nameRef.current && nameRef.current.value === '') {
                     nameRef.current.classList.add('errorInput');
                     nameRef.current.focus();
                     error = true;
                   }
-                  if (error) return;
+                  //debug
+                  if (!error) return;
                   previousButtonRef.current?.classList.remove('invisible');
                   yourInfoRef.current.classList.remove('selected');
                   yourInfoRef.current.classList.add('hidden');
                   yourInfoRef.current.classList.remove('flex');
-                  selectPlanRef.current?.classList.add('selected');
-                  selectPlanRef.current?.classList.remove('hidden');
-                  selectPlanRef.current?.classList.add('flex');
-                } else if (selectPlanRef.current?.classList.contains('selected')) {
+                  selectPlanRef.current.classList.add('selected');
+                  selectPlanRef.current.classList.remove('hidden');
+                  selectPlanRef.current.classList.add('flex');
+                } else if (selectPlanRef.current?.classList.contains('selected') && addOnsRef.current) {
                   selectPlanRef.current.classList.remove('selected');
                   selectPlanRef.current.classList.add('hidden');
                   selectPlanRef.current.classList.remove('flex');
-                  addOnsRef.current?.classList.add('selected');
-                  addOnsRef.current?.classList.remove('hidden');
-                  addOnsRef.current?.classList.add('flex');
-                } else if (addOnsRef.current?.classList.contains('selected')) {
+                  addOnsRef.current.classList.add('selected');
+                  addOnsRef.current.classList.remove('hidden');
+                  addOnsRef.current.classList.add('flex');
+                } else if (addOnsRef.current?.classList.contains('selected') && summaryRef.current) {
                   addOnsRef.current.classList.remove('selected');
                   addOnsRef.current.classList.add('hidden');
                   addOnsRef.current.classList.remove('flex');
-                  summaryRef.current?.classList.add('selected');
-                  summaryRef.current?.classList.remove('hidden');
-                  summaryRef.current?.classList.add('flex');
+                  summaryRef.current.classList.add('selected');
+                  summaryRef.current.classList.remove('hidden');
+                  summaryRef.current.classList.add('flex');
                 }
               }}
               type="button"

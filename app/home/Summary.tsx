@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
 
 export default function Summary() {
-  const { summaryRef } = useContext(DataContext);
+  const { summaryRef, billing } = useContext(DataContext);
 
   const items = {
     title: 'Finishing up',
@@ -39,15 +39,7 @@ export default function Summary() {
     </>
   );
 
-  const Billing = () => (
-    <>
-      {document.getElementById('billing')?.checked ? (
-        <span>{items.billing.yearly}</span>
-      ) : (
-        <span>{items.billing.monthly}</span>
-      )}
-    </>
-  );
+  const Billing = () => <>{billing ? <span>{items.billing.yearly}</span> : <span>{items.billing.monthly}</span>}</>;
 
   return (
     <div

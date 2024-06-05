@@ -1,5 +1,5 @@
 'use client';
-import { ReactNode, useRef, createContext, RefObject } from 'react';
+import { ReactNode, useRef, createContext, RefObject, useState, Dispatch, SetStateAction } from 'react';
 
 export enum Steps {
   YOUR_INFO = 'YOUR INFO',
@@ -18,10 +18,13 @@ export const DataContext = createContext(
     nameRef: RefObject<HTMLInputElement>;
     mailRef: RefObject<HTMLInputElement>;
     telRef: RefObject<HTMLInputElement>;
+    billing: boolean;
+    setBilling: Dispatch<SetStateAction<boolean>>;
   },
 );
 
 export default function DataProvider({ children }: { children: ReactNode }) {
+  const [billing, setBilling] = useState(false);
   const yourInfoRef = useRef<HTMLDivElement>(null);
   const selectPlanRef = useRef<HTMLDivElement>(null);
   const addOnsRef = useRef<HTMLDivElement>(null);
@@ -40,6 +43,8 @@ export default function DataProvider({ children }: { children: ReactNode }) {
         nameRef,
         mailRef,
         telRef,
+        billing,
+        setBilling,
       }}
     >
       {children}

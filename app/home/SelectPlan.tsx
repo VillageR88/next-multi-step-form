@@ -38,7 +38,7 @@ const RadioInput = ({
 };
 
 export default function SelectPlan() {
-  const { selectPlanRef } = useContext(DataContext);
+  const { selectPlanRef, setBilling } = useContext(DataContext);
 
   const items = {
     title: 'Select your plan',
@@ -107,6 +107,9 @@ export default function SelectPlan() {
             htmlFor="billing"
           >
             <input
+              onChange={() => {
+                setBilling((prev) => !prev);
+              }}
               title={undefined}
               className="size-[12px] -translate-x-2 cursor-pointer appearance-none rounded-full bg-white transition checked:translate-x-2"
               type="checkbox"

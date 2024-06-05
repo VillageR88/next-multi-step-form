@@ -5,7 +5,7 @@ import Image from 'next/image';
 import imageCheckmark from '@/public/assets/images/icon-checkmark.svg';
 
 export default function Addons() {
-  const { addOnsRef } = useContext(DataContext);
+  const { addOnsRef, billing } = useContext(DataContext);
 
   const items = {
     title: 'Pick add-ons',
@@ -63,12 +63,7 @@ export default function Addons() {
                   <h2>{field.title}</h2>
                   <p>{field.description}</p>
                 </div>
-                <span className="addonCost group-has-[input[name='billing']:checked]/home:hidden">
-                  {field.costMonthly}
-                </span>
-                <span className="addonCost hidden group-has-[input[name='billing']:checked]/home:block">
-                  {field.costYearly}
-                </span>
+                <span className="addonCost">{billing ? field.costYearly : field.costMonthly}</span>
               </div>
             </label>
           </li>
