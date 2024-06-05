@@ -1,9 +1,10 @@
 'use client';
 import { useContext } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
+import { Plan } from '@/app/_providers/DataContext';
 
 export default function Summary() {
-  const { summaryRef, billing } = useContext(DataContext);
+  const { summaryRef, billing, plan } = useContext(DataContext);
 
   const items = {
     title: 'Finishing up',
@@ -32,15 +33,15 @@ export default function Summary() {
   };
 
   const PlanTitle = () => (
-    <>
-      {document.getElementById('arcade')?.checked && <span>{items.plan.arcade.title}</span>}
-      {document.getElementById('advanced')?.checked && <span>{items.plan.advanced.title}</span>}
-      {document.getElementById('pro')?.checked && <span>{items.plan.pro.title}</span>}
-    </>
+    <span>
+      {plan === Plan.ARCADE
+        ? items.plan.arcade.title
+        : plan === Plan.ADVANCED
+          ? items.plan.advanced.title
+          : plan === Plan.PRO && items.plan.pro.title}
+    </span>
   );
-
-  const Billing = () => <>{billing ? <span>{items.billing.yearly}</span> : <span>{items.billing.monthly}</span>}</>;
-
+  const Billing = () => <span>{billing ? items.billing.yearly : items.billing.monthly}</span>;
   return (
     <div
       ref={summaryRef}

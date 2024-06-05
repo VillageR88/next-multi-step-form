@@ -8,6 +8,12 @@ export enum Steps {
   SUMMARY = 'SUMMARY',
 }
 
+export enum Plan {
+  ARCADE = 'arcade',
+  ADVANCED = 'advanced',
+  PRO = 'pro',
+}
+
 //const items = Object.values(Steps);
 export const DataContext = createContext(
   {} as {
@@ -20,11 +26,14 @@ export const DataContext = createContext(
     telRef: RefObject<HTMLInputElement>;
     billing: boolean;
     setBilling: Dispatch<SetStateAction<boolean>>;
+    plan: Plan | undefined;
+    setPlan: Dispatch<SetStateAction<Plan | undefined>>;
   },
 );
 
 export default function DataProvider({ children }: { children: ReactNode }) {
   const [billing, setBilling] = useState(false);
+  const [plan, setPlan] = useState<Plan | undefined>(undefined);
   const yourInfoRef = useRef<HTMLDivElement>(null);
   const selectPlanRef = useRef<HTMLDivElement>(null);
   const addOnsRef = useRef<HTMLDivElement>(null);
@@ -45,6 +54,8 @@ export default function DataProvider({ children }: { children: ReactNode }) {
         telRef,
         billing,
         setBilling,
+        plan,
+        setPlan,
       }}
     >
       {children}

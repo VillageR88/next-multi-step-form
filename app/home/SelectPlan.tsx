@@ -1,6 +1,7 @@
 'use client';
 import { useContext } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
+import { Plan } from '@/app/_providers/DataContext';
 import Image from 'next/image';
 import imageArcade from '@/public/assets/images/icon-arcade.svg';
 import imageAdvanced from '@/public/assets/images/icon-advanced.svg';
@@ -19,11 +20,22 @@ const RadioInput = ({
   descriptionYearly: string;
   src: string;
 }) => {
+  const { setPlan } = useContext(DataContext);
+
   const discount = '2 months free';
 
   return (
     <label className="radioParent">
-      <input className="absolute size-0" required type="radio" id={id} name="queryType" />
+      <input
+        onChange={(e) => {
+          setPlan(e.target.id as Plan);
+        }}
+        className="absolute size-0"
+        required
+        type="radio"
+        id={id}
+        name="queryType"
+      />
       <Image src={src} width={40} height={40} className="size-[40px]" alt="icon" />
       <div className="flex flex-col">
         <h2>{title}</h2>
