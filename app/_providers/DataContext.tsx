@@ -41,12 +41,34 @@ export const DataContext = createContext(
     setBilling: Dispatch<SetStateAction<boolean>>;
     plan: [Plan, number] | undefined;
     setPlan: Dispatch<SetStateAction<[Plan, number] | undefined>>;
+    addons: {
+      onlineService: boolean;
+      largerStorage: boolean;
+      customizableProfile: boolean;
+    };
+    setAddons: Dispatch<
+      SetStateAction<{
+        onlineService: boolean;
+        largerStorage: boolean;
+        customizableProfile: boolean;
+      }>
+    >;
   },
 );
 
 export default function DataProvider({ children }: { children: ReactNode }) {
   const [billing, setBilling] = useState(false);
   const [plan, setPlan] = useState<[Plan, number] | undefined>(undefined);
+  const [addons, setAddons] = useState<{
+    onlineService: boolean;
+    largerStorage: boolean;
+    customizableProfile: boolean;
+  }>({
+    onlineService: false,
+    largerStorage: false,
+    customizableProfile: false,
+  });
+
   const yourInfoRef = useRef<HTMLDivElement>(null);
   const selectPlanRef = useRef<HTMLDivElement>(null);
   const addOnsRef = useRef<HTMLDivElement>(null);
@@ -69,6 +91,8 @@ export default function DataProvider({ children }: { children: ReactNode }) {
         setBilling,
         plan,
         setPlan,
+        addons,
+        setAddons,
       }}
     >
       {children}

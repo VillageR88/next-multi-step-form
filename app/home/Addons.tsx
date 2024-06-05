@@ -5,7 +5,7 @@ import Image from 'next/image';
 import imageCheckmark from '@/public/assets/images/icon-checkmark.svg';
 
 export default function Addons() {
-  const { addOnsRef, billing } = useContext(DataContext);
+  const { addOnsRef, billing, setAddons } = useContext(DataContext);
 
   const items = {
     title: 'Pick add-ons',
@@ -19,14 +19,14 @@ export default function Addons() {
         costYearly: '+$10/yr',
       },
       {
-        id: 'largerstorage',
+        id: 'largerStorage',
         title: 'Larger storage',
         description: 'Extra 1TB of cloud save',
         costMonthly: '+$2/mo',
         costYearly: '+$20/yr',
       },
       {
-        id: 'customizableprofile',
+        id: 'customizableProfile',
         title: 'Customizable profile',
         description: 'Custom theme on your profile',
         costMonthly: '+$2/mo',
@@ -48,7 +48,15 @@ export default function Addons() {
         {items.fields.map((field, index) => (
           <li className="flex" key={index}>
             <label htmlFor={field.id} className="checkParent group flex items-center gap-[24px] px-[24px]">
-              <input title={undefined} id={field.id} className="absolute size-0" type="checkbox" />
+              <input
+                onChange={(e) => {
+                  setAddons((prev) => ({ ...prev, [field.id]: e.target.checked }));
+                }}
+                title={undefined}
+                id={field.id}
+                className="absolute size-0"
+                type="checkbox"
+              />
               <div className="flex h-[20px] min-w-[20px] select-none items-center justify-center rounded-[4px] border border-[#D6D9E6] bg-transparent group-has-[input:checked]:border-[#483EFF] group-has-[input:checked]:bg-[#483EFF]">
                 <Image
                   alt="checkbox"
