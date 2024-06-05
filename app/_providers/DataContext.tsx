@@ -14,6 +14,19 @@ export enum Plan {
   PRO = 'pro',
 }
 
+export const costFormatted = ({
+  cost,
+  billing,
+}: {
+  cost: number | undefined;
+  billing: boolean;
+}): string | undefined => {
+  if (!cost) return;
+  const firstPart = `$${cost.toString()}`;
+  const secondPart = billing ? '/yr' : '/mo';
+  return firstPart + secondPart;
+};
+
 //const items = Object.values(Steps);
 export const DataContext = createContext(
   {} as {
@@ -26,14 +39,14 @@ export const DataContext = createContext(
     telRef: RefObject<HTMLInputElement>;
     billing: boolean;
     setBilling: Dispatch<SetStateAction<boolean>>;
-    plan: Plan | undefined;
-    setPlan: Dispatch<SetStateAction<Plan | undefined>>;
+    plan: [Plan, number] | undefined;
+    setPlan: Dispatch<SetStateAction<[Plan, number] | undefined>>;
   },
 );
 
 export default function DataProvider({ children }: { children: ReactNode }) {
   const [billing, setBilling] = useState(false);
-  const [plan, setPlan] = useState<Plan | undefined>(undefined);
+  const [plan, setPlan] = useState<[Plan, number] | undefined>(undefined);
   const yourInfoRef = useRef<HTMLDivElement>(null);
   const selectPlanRef = useRef<HTMLDivElement>(null);
   const addOnsRef = useRef<HTMLDivElement>(null);

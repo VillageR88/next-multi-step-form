@@ -1,10 +1,9 @@
 'use client';
 import { useContext } from 'react';
-import { DataContext } from '@/app/_providers/DataContext';
-import { Plan } from '@/app/_providers/DataContext';
+import { DataContext, costFormatted } from '@/app/_providers/DataContext';
 
 export default function Summary() {
-  const { summaryRef, billing, plan } = useContext(DataContext);
+  const { summaryRef, billing, plan, selectPlanRef } = useContext(DataContext);
 
   const items = {
     title: 'Finishing up',
@@ -12,18 +11,12 @@ export default function Summary() {
     plan: {
       arcade: {
         title: 'Arcade',
-        costMonthly: '$9/mo',
-        costYearly: '$90/yr',
       },
       advanced: {
         title: 'Advanced',
-        costMonthly: '$12/mo',
-        costYearly: '$120/yr',
       },
       pro: {
         title: 'Pro',
-        costMonthly: '$15/mo',
-        costYearly: '$150/yr',
       },
     },
     billing: {
@@ -32,16 +25,8 @@ export default function Summary() {
     },
   };
 
-  const PlanTitle = () => (
-    <span>
-      {plan === Plan.ARCADE
-        ? items.plan.arcade.title
-        : plan === Plan.ADVANCED
-          ? items.plan.advanced.title
-          : plan === Plan.PRO && items.plan.pro.title}
-    </span>
-  );
-  const Billing = () => <span>{billing ? items.billing.yearly : items.billing.monthly}</span>;
+  const billingText = billing ? items.billing.yearly : items.billing.monthly;
+
   return (
     <div
       ref={summaryRef}
@@ -51,10 +36,31 @@ export default function Summary() {
         <h1>{items.title}</h1>
         <p>{items.description}</p>
       </header>
-      <div className="flex flex-col">
-        <h2>
-          <PlanTitle /> <Billing />
-        </h2>
+      <div className="flex items-center justify-between">
+        <div className="flex flex-col">
+          <h2>{plan && plan[0][0].toUpperCase() + plan[0].slice(1) + billingText.toString()}</h2>
+          <button
+            onClick={() => {
+              if (!summaryRef.current || !selectPlanRef.current) return;
+              summaryRef.current.classList.remove('selected');
+              summaryRef.current.classList.add('hidden');
+              summaryRef.current.classList.remove('flex');
+              selectPlanRef.current.classList.add('selected');
+              selectPlanRef.current.classList.remove('hidden');
+              selectPlanRef.current.classList.add('flex');
+            }}
+            type="button"
+            className="w-fit text-[14px] leading-[20px] text-[#9699AA] underline underline-offset-2"
+          >
+            Change
+          </button>
+        </div>
+        <p className="text-[16px] font-bold text-[#022959]">
+          {costFormatted({
+            cost: plan?.[1],
+            billing,
+          })}
+        </p>
       </div>
     </div>
   );

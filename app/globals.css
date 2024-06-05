@@ -111,5 +111,5 @@ input[type='radio'] {
 .addons,
 .selectPlan,
 .summary {
-  @apply cursor-pointer;
+  @apply cursor-default;
 }

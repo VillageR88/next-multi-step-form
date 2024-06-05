@@ -1,6 +1,6 @@
 'use client';
 import { useContext } from 'react';
-import { DataContext } from '@/app/_providers/DataContext';
+import { DataContext, costFormatted } from '@/app/_providers/DataContext';
 import { Plan } from '@/app/_providers/DataContext';
 import Image from 'next/image';
 import imageArcade from '@/public/assets/images/icon-arcade.svg';
@@ -10,17 +10,17 @@ import imagePro from '@/public/assets/images/icon-pro.svg';
 const RadioInput = ({
   id,
   title,
-  descriptionMonthly,
-  descriptionYearly,
+  costMonthly,
+  costYearly,
   src,
 }: {
   id: string;
   title: string;
-  descriptionMonthly: string;
-  descriptionYearly: string;
+  costMonthly: number;
+  costYearly: number;
   src: string;
 }) => {
-  const { setPlan } = useContext(DataContext);
+  const { setPlan, billing } = useContext(DataContext);
 
   const discount = '2 months free';
 
@@ -28,7 +28,7 @@ const RadioInput = ({
     <label className="radioParent">
       <input
         onChange={(e) => {
-          setPlan(e.target.id as Plan);
+          setPlan([e.target.id as Plan, billing ? costYearly : costMonthly]);
         }}
         className="absolute size-0"
         required
@@ -39,8 +39,11 @@ const RadioInput = ({
       <Image src={src} width={40} height={40} className="size-[40px]" alt="icon" />
       <div className="flex flex-col">
         <h2>{title}</h2>
-        <p className="leading-[29px] group-has-[input[type='checkbox']:checked]/1:hidden">{descriptionMonthly}</p>
-        <p className="leading-[29px] group-has-[input[type='checkbox']:not(:checked)]/1:hidden">{descriptionYearly}</p>
+        <p className="leading-[29px]">
+          {billing
+            ? costFormatted({ cost: costYearly, billing: billing })
+            : costFormatted({ cost: costMonthly, billing: billing })}
+        </p>
         <p className="text-[12px] text-[#022959] group-has-[input[type='checkbox']:not(:checked)]/1:hidden">
           {discount}
         </p>
@@ -50,8 +53,7 @@ const RadioInput = ({
 };
 
 export default function SelectPlan() {
-  const { selectPlanRef, setBilling } = useContext(DataContext);
-
+  const { selectPlanRef, billing, setBilling, setPlan } = useContext(DataContext);
   const items = {
     title: 'Select your plan',
     description: 'You have the option of monthly or yearly billing.',
@@ -59,22 +61,24 @@ export default function SelectPlan() {
       {
         id: 'arcade',
         title: 'Arcade',
-        descriptionMonthly: '$9/mo',
-        descriptionYearly: '$90/yr',
+        // descriptionMonthly: '$9/mo',
+        // descriptionYearly: '$90/yr',
+        costMonthly: 9,
+        costYearly: 90,
         src: imageArcade as string,
       },
       {
         id: 'advanced',
         title: 'Advanced',
-        descriptionMonthly: '$12/mo',
-        descriptionYearly: '$120/yr',
+        costMonthly: 12,
+        costYearly: 120,
         src: imageAdvanced as string,
       },
       {
         id: 'pro',
         title: 'Pro',
-        descriptionMonthly: '$15/mo',
-        descriptionYearly: '$150/yr',
+        costMonthly: 15,
+        costYearly: 150,
         src: imagePro as string,
       },
     ],
@@ -100,8 +104,8 @@ export default function SelectPlan() {
               <RadioInput
                 id={field.id}
                 title={field.title}
-                descriptionMonthly={field.descriptionMonthly}
-                descriptionYearly={field.descriptionYearly}
+                costMonthly={field.costMonthly}
+                costYearly={field.costYearly}
                 src={field.src}
               />
             </li>
@@ -121,6 +125,15 @@ export default function SelectPlan() {
             <input
               onChange={() => {
                 setBilling((prev) => !prev);
+                setPlan((prev) => {
+                  if (!prev) return;
+                  const newPrev = { ...prev } as [Plan, number];
+                  if (!newPrev[1]) return;
+                  newPrev[1] = billing
+                    ? items.fields.find((field) => field.id === (prev[0] as string))?.costMonthly ?? 0
+                    : items.fields.find((field) => field.id === (prev[0] as string))?.costYearly ?? 0;
+                  return newPrev;
+                });
               }}
               title={undefined}
               className="size-[12px] -translate-x-2 cursor-pointer appearance-none rounded-full bg-white transition checked:translate-x-2"
