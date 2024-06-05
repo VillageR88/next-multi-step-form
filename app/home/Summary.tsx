@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { DataContext, costFormatted } from '@/app/_providers/DataContext';
 
 export default function Summary() {
-  const { summaryRef, billing, plan, selectPlanRef } = useContext(DataContext);
+  const { summaryRef, billing, plan, selectPlanRef, addons } = useContext(DataContext);
 
   const items = {
     title: 'Finishing up',
@@ -23,6 +23,17 @@ export default function Summary() {
       monthly: ' (Monthly)',
       yearly: ' (Yearly)',
     },
+    addons: {
+      onlineService: {
+        title: 'Online service',
+      },
+      largerStorage: {
+        title: 'Larger storage',
+      },
+      customizableProfile: {
+        title: 'Customizable profile',
+      },
+    },
   };
 
   const billingText = billing ? items.billing.yearly : items.billing.monthly;
@@ -38,7 +49,7 @@ export default function Summary() {
       </header>
       <div className="flex flex-col gap-[24px] rounded-[8px] bg-[#F8F9FF] px-[24px] pb-[24px] pt-[16px]">
         <div className="flex items-center justify-between">
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-[7px]">
             <h2>{plan && plan[0][0].toUpperCase() + plan[0].slice(1) + billingText.toString()}</h2>
             <button
               onClick={() => {
@@ -63,11 +74,14 @@ export default function Summary() {
             })}
           </p>
         </div>
-        <div className="flex flex-col gap-[16px]">
-          <div className="h-px w-full bg-[#9699AA]/20"></div>
-          <div>s</div>
-          <div>s</div>
-        </div>
+        {(addons.onlineService || addons.largerStorage || addons.customizableProfile) && (
+          <div className="flex flex-col gap-[16px] text-[14px] text-[#9699AA]">
+            <div className="h-px w-full bg-[#9699AA]/20"></div>
+            {addons.onlineService && <div>{items.addons.onlineService.title}</div>}
+            {addons.largerStorage && <div>{items.addons.largerStorage.title}</div>}
+            {addons.customizableProfile && <div>{items.addons.customizableProfile.title}</div>}
+          </div>
+        )}
       </div>
     </div>
   );
