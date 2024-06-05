@@ -88,7 +88,13 @@ export default function Summary() {
                 addon.condition && (
                   <div key={key} className="flex justify-between">
                     <p>{addon.title}</p>
-                    <p className="text-[#022959]">{Object.entries(addons).filter((x) => x[0] === key)[0][1].cost}</p>
+                    <p className="text-[#022959]">
+                      {costFormatted({
+                        cost: Object.entries(addons).filter((x) => x[0] === key)[0][1].cost,
+                        billing: billing,
+                        prefixWithPlus: true,
+                      })}
+                    </p>
                   </div>
                 )
               );

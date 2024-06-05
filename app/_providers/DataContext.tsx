@@ -23,14 +23,17 @@ export interface tAddons {
 export const costFormatted = ({
   cost,
   billing,
+  prefixWithPlus,
 }: {
   cost: number | undefined;
   billing: boolean;
+  prefixWithPlus?: boolean;
 }): string | undefined => {
   if (!cost) return;
   const firstPart = `$${cost.toString()}`;
   const secondPart = billing ? '/yr' : '/mo';
-  return firstPart + secondPart;
+  if (prefixWithPlus) return `+${firstPart + secondPart}`;
+  else return firstPart + secondPart;
 };
 
 //const items = Object.values(Steps);
