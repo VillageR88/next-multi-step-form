@@ -44,7 +44,7 @@ const RadioInput = ({
             ? costFormatted({ cost: costYearly, billing: billing })
             : costFormatted({ cost: costMonthly, billing: billing })}
         </p>
-        <p className="text-[12px] text-[#022959] group-has-[input[type='checkbox']:not(:checked)]/1:hidden">
+        <p className="text-[12px] text-[#022959] transition duration-100 group-has-[input[type='checkbox']:not(:checked)]/1:invisible group-has-[input[type='checkbox']:not(:checked)]/1:h-0 group-has-[input[type='checkbox']:not(:checked)]/1:opacity-0">
           {discount}
         </p>
       </div>
