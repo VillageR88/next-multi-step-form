@@ -1,9 +1,8 @@
 'use client';
 import { useContext } from 'react';
-import { DataContext, itemsAddons as items } from '@/app/_providers/DataContext';
+import { DataContext, itemsAddons } from '@/app/_providers/DataContext';
 import Image from 'next/image';
 import imageCheckmark from '@/public/assets/images/icon-checkmark.svg';
-import type { tAddons } from '@/app/_providers/DataContext';
 
 export default function Addons() {
   const { addOnsRef, billing, setAddons } = useContext(DataContext);
@@ -21,28 +20,25 @@ export default function Addons() {
       className={`group/1 addons mt-[40px] hidden h-[348px] w-full max-w-[450px] flex-col gap-[40px]`}
     >
       <header className="flex h-[68px] flex-col gap-[11px]">
-        <h1>{items.title}</h1>
-        <p>{items.description}</p>
+        <h1>{itemsAddons.title}</h1>
+        <p>{itemsAddons.description}</p>
       </header>
       <ul className="flex flex-col gap-[16px]">
-        {Object.keys(items.fields).map((field, index) => {
-          const item = items.fields[field];
+        {Object.keys(itemsAddons.fields).map((field, index) => {
+          const item = itemsAddons.fields[field];
 
           return (
             <li className="flex" key={index}>
               <label htmlFor={field} className="checkParent group flex items-center gap-[24px] px-[24px]">
                 <input
                   onChange={(e) => {
-                    setAddons(
-                      (prev) =>
-                        ({
-                          ...prev,
-                          [field]: {
-                            checked: e.target.checked,
-                            cost: billing ? item.costMonthly * 10 : item.costMonthly,
-                          },
-                        }) as tAddons,
-                    );
+                    setAddons((prev) => ({
+                      ...prev,
+                      [field]: {
+                        checked: e.target.checked,
+                        cost: billing ? item.costMonthly * 10 : item.costMonthly,
+                      },
+                    }));
                   }}
                   title={undefined}
                   id={field}

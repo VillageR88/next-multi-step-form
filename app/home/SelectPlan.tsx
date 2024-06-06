@@ -56,7 +56,6 @@ export default function SelectPlan() {
     monthly: 'Monthly',
     yearly: 'Yearly',
   };
-  console.log(Object.entries(itemsSelectPlan.fields).map((item) => item));
   return (
     <div
       ref={selectPlanRef}

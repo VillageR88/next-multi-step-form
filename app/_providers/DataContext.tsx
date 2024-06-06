@@ -95,6 +95,15 @@ export const itemsSelectPlan: tItemsSelectPlan = {
   },
 };
 
+export const itemsSummary = {
+  title: 'Finishing up',
+  description: 'Double-check everything looks OK before confirming.',
+  billing: {
+    monthly: ' (Monthly)',
+    yearly: ' (Yearly)',
+  },
+};
+
 export const costFormatted = ({
   cost,
   billing,

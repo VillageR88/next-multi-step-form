@@ -1,48 +1,11 @@
 'use client';
 import { useContext } from 'react';
-import { DataContext, costFormatted } from '@/app/_providers/DataContext';
+import { DataContext, costFormatted, itemsSummary } from '@/app/_providers/DataContext';
 
 export default function Summary() {
   const { summaryRef, billing, plan, selectPlanRef, addons } = useContext(DataContext);
 
-  const items = {
-    title: 'Finishing up',
-    description: 'Double-check everything looks OK before confirming.',
-    plan: {
-      arcade: {
-        title: 'Arcade',
-      },
-      advanced: {
-        title: 'Advanced',
-      },
-      pro: {
-        title: 'Pro',
-      },
-    },
-    billing: {
-      monthly: ' (Monthly)',
-      yearly: ' (Yearly)',
-    },
-    addons: {
-      onlineService: {
-        id: 'onlineService',
-        title: 'Online service',
-        condition: addons.onlineService.checked,
-      },
-      largerStorage: {
-        id: 'largerStorage',
-        title: 'Larger storage',
-        condition: addons.largerStorage.checked,
-      },
-      customizableProfile: {
-        id: 'customizableProfile',
-        title: 'Customizable profile',
-        condition: addons.customizableProfile.checked,
-      },
-    },
-  };
-
-  const billingText = billing ? items.billing.yearly : items.billing.monthly;
+  const billingText = billing ? itemsSummary.billing.yearly : itemsSummary.billing.monthly;
   const anyChecked = addons.onlineService.checked || addons.largerStorage.checked || addons.customizableProfile.checked;
   const totalTitle = 'Total ' + (billing ? '(per year)' : '(per month)');
   return (
@@ -51,8 +14,8 @@ export default function Summary() {
       className={`group/1 summary mt-[40px] hidden h-[348px] w-full max-w-[450px] flex-col gap-[40px]`}
     >
       <header className="flex h-[68px] flex-col gap-[11px]">
-        <h1>{items.title}</h1>
-        <p>{items.description}</p>
+        <h1>{itemsSummary.title}</h1>
+        <p>{itemsSummary.description}</p>
       </header>
       <div className="flex flex-col gap-[24px]">
         <div className="flex flex-col gap-[24px] rounded-[8px] bg-[#F8F9FF] px-[24px] pb-[24px] pt-[16px]">
@@ -85,12 +48,11 @@ export default function Summary() {
           {anyChecked && (
             <div className="flex flex-col gap-[16px] text-[14px] text-[#9699AA]">
               <div className="h-px w-full bg-[#9699AA]/20"></div>
-              {Object.keys(items.addons).map((key) => {
-                const addon = items.addons[key as keyof typeof items.addons];
+              {Object.keys(addons).map((key) => {
                 return (
-                  addon.condition && (
+                  addons[key as keyof typeof addons].checked && (
                     <div key={key} className="flex justify-between">
-                      <p>{addon.title}</p>
+                      <p>{key}</p>
                       <p className="text-[#022959]">
                         {costFormatted({
                           cost: Object.entries(addons).filter((x) => x[0] === key)[0][1].cost,
