@@ -39,14 +39,17 @@ export interface tItemsAddons {
 export interface tItemsSelectPlan {
   title: string;
   description: string;
-  fields: {
-    id: string;
-    title: string;
-    costMonthly: number;
-    costYearly: number;
-    src: string;
-  }[];
+  fields: Record<
+    string,
+    {
+      title: string;
+      costMonthly: number;
+      costYearly: number;
+      src: string;
+    }
+  >;
 }
+[];
 
 export const itemsAddons: tItemsAddons = {
   title: 'Pick add-ons',
@@ -76,29 +79,26 @@ export const itemsAddons: tItemsAddons = {
 export const itemsSelectPlan: tItemsSelectPlan = {
   title: 'Select your plan',
   description: 'You have the option of monthly or yearly billing.',
-  fields: [
-    {
-      id: 'arcade',
+  fields: {
+    arcade: {
       title: 'Arcade',
       costMonthly: 9,
       costYearly: 90,
       src: imageArcade as string,
     },
-    {
-      id: 'advanced',
+    advanced: {
       title: 'Advanced',
       costMonthly: 12,
       costYearly: 120,
       src: imageAdvanced as string,
     },
-    {
-      id: 'pro',
+    pro: {
       title: 'Pro',
       costMonthly: 15,
       costYearly: 150,
       src: imagePro as string,
     },
-  ],
+  },
 };
 
 export const costFormatted = ({

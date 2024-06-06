@@ -1,9 +1,9 @@
 'use client';
 import { useContext } from 'react';
-import { DataContext, costFormatted, itemsSelectPlan as items, itemsAddons } from '@/app/_providers/DataContext';
+import { DataContext, costFormatted, itemsSelectPlan, itemsAddons } from '@/app/_providers/DataContext';
 import { Plan } from '@/app/_providers/DataContext';
 import Image from 'next/image';
-import type { tAddons, tItemsAddons } from '@/app/_providers/DataContext';
+import type { tAddons } from '@/app/_providers/DataContext';
 
 const RadioInput = ({
   id,
@@ -57,29 +57,32 @@ export default function SelectPlan() {
     monthly: 'Monthly',
     yearly: 'Yearly',
   };
-
+  console.log(Object.entries(itemsSelectPlan.fields).map((item) => item));
   return (
     <div
       ref={selectPlanRef}
       className={`group/1 selectPlan mt-[40px] hidden h-[348px] w-full max-w-[450px] flex-col gap-[40px]`}
     >
       <header className="flex h-[68px] flex-col gap-[11px]">
-        <h1>{items.title}</h1>
-        <p>{items.description}</p>
+        <h1>{itemsSelectPlan.title}</h1>
+        <p>{itemsSelectPlan.description}</p>
       </header>
       <div className=" flex flex-col gap-[32px]">
         <ul className="flex gap-[24px]">
-          {items.fields.map((field, index) => (
-            <li key={index}>
-              <RadioInput
-                id={field.id}
-                title={field.title}
-                costMonthly={field.costMonthly}
-                costYearly={field.costYearly}
-                src={field.src}
-              />
-            </li>
-          ))}
+          {Object.keys(itemsSelectPlan.fields).map((key, index) => {
+            const item = itemsSelectPlan.fields[key];
+            return (
+              <li key={index}>
+                <RadioInput
+                  id={key}
+                  title={item.title}
+                  costMonthly={item.costMonthly}
+                  costYearly={item.costYearly}
+                  src={item.src}
+                />
+              </li>
+            );
+          })}
         </ul>
         <div className="group/2 flex h-[48px] items-center justify-center gap-[24px] rounded-[8px] bg-[#F8F9FF] *:cursor-pointer">
           <label
@@ -97,10 +100,10 @@ export default function SelectPlan() {
                 setBilling((prev) => !prev);
                 setPlan((prev) => {
                   if (!prev) return;
-                  const newPrev = { ...prev } as [Plan, number];
-                  newPrev[1] = billing
-                    ? items.fields.find((field) => field.id === (prev[0] as string))?.costMonthly ?? 0
-                    : items.fields.find((field) => field.id === (prev[0] as string))?.costYearly ?? 0;
+                  const newPrev = { ...prev };
+                  const planId = prev[0] as string;
+                  const plan = itemsSelectPlan.fields[planId];
+                  newPrev[1] = billing ? plan.costMonthly : plan.costYearly;
                   return newPrev;
                 });
                 setAddons(

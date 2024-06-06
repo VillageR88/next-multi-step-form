@@ -114,4 +114,3 @@ export default function Summary() {
     </div>
   );
 }
-//Object.entries(addons).filter((x) => x[0] === key)[0][1].cost
