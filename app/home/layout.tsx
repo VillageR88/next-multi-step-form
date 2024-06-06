@@ -4,6 +4,31 @@ import { DataContext } from '@/app/_providers/DataContext';
 import Image from 'next/image';
 import imageSidebarDesktop from '@/public/assets/images/bg-sidebar-desktop.svg';
 import { Steps } from '@/app/_providers/DataContext';
+import { useFormState, useFormStatus } from 'react-dom';
+import Loader from '../components/Loader';
+import { CreateInvoiceContactForm } from '@/app/_lib/functionsServer';
+
+const titles = {
+  step: 'STEP ',
+  buttonPrevious: 'Go Back',
+  buttonNext: 'Next Step',
+  confirm: 'Confirm',
+};
+
+const SubmitButton = ({ refButtonConfirm }: { refButtonConfirm: React.RefObject<HTMLButtonElement> }) => {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      ref={refButtonConfirm}
+      type="submit"
+      className="hidden h-[48px] w-[123px] items-center justify-center rounded-[8px] bg-[#483EFF] text-white
+"
+    >
+      {pending ? <Loader pending={pending} /> : titles.confirm}
+    </button>
+  );
+};
 
 export default function LayoutHome({ children }: { children: ReactNode }) {
   const {
@@ -17,16 +42,28 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
     refButtonConfirm,
     refButtonNext,
     refButtonPrevious,
+    plan,
+    addons,
   } = useContext(DataContext);
+  const sum =
+    (plan && plan[1] + Object.values(addons).reduce((acc, cur) => (cur.checked ? acc + cur.cost : acc), 0)) ?? 0;
+
+  const [state, action] = useFormState<
+    {
+      number: number;
+      redirection: boolean;
+    },
+    FormData
+  >((state, payload) => CreateInvoiceContactForm(state, payload, sum), {
+    number: 0,
+    redirection: false,
+  });
+  //console.log(state);
+
   const circleArray = ['circle1', 'circle2', 'circle3', 'circle4'];
 
   const items = Object.values(Steps);
-  const titles = {
-    step: 'STEP ',
-    buttonPrevious: 'Go Back',
-    buttonNext: 'Next Step',
-    confirm: 'Confirm',
-  };
+
   const Circle = ({ index }: { index: number }) => {
     return (
       <div
@@ -39,7 +76,10 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
 
   return (
     <main className="group/home relative z-0 flex min-h-dvh flex-col items-center justify-center overflow-x-clip px-6 font-ubuntu sm:min-h-screen">
-      <form className="flex h-[600px] w-full max-w-[940px] items-center justify-between gap-[100px] rounded-[15px] bg-white py-[16px] pl-[16px] pr-[100px]">
+      <form
+        action={action}
+        className="flex h-[600px] w-full max-w-[940px] items-center justify-between gap-[100px] rounded-[15px] bg-white py-[16px] pl-[16px] pr-[100px]"
+      >
         <div className="relative min-h-[568px] min-w-[274px]">
           <Image
             priority
@@ -94,6 +134,7 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
                   addOnsRef.current.classList.remove('hidden');
                   addOnsRef.current.classList.add('flex');
                   refButtonNext.current?.classList.remove('hidden');
+                  refButtonConfirm.current?.classList.remove('flex');
                   refButtonConfirm.current?.classList.add('hidden');
                 }
               }}
@@ -170,6 +211,7 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
                   summaryRef.current.classList.add('flex');
                   refButtonNext.current?.classList.add('hidden');
                   refButtonConfirm.current?.classList.remove('hidden');
+                  refButtonConfirm.current?.classList.add('flex');
                 }
               }}
               type="button"
@@ -177,14 +219,7 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
             >
               {titles.buttonNext}
             </button>
-            <button
-              ref={refButtonConfirm}
-              type="submit"
-              className="hidden h-[48px] w-[123px] rounded-[8px] bg-[#483EFF] text-white
-"
-            >
-              {titles.confirm}
-            </button>
+            <SubmitButton refButtonConfirm={refButtonConfirm} />
           </div>
         </div>
       </form>

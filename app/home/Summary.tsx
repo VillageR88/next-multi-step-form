@@ -33,6 +33,7 @@ export default function Summary() {
                   selectPlanRef.current.classList.add('flex');
                   refButtonNext.current?.classList.remove('hidden');
                   refButtonConfirm.current?.classList.add('hidden');
+                  refButtonConfirm.current?.classList.remove('flex');
                 }}
                 type="button"
                 className="w-fit text-[14px] leading-[20px] text-[#9699AA] underline underline-offset-2"

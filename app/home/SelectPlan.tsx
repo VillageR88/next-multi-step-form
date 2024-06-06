@@ -32,6 +32,7 @@ const RadioInput = ({
         type="radio"
         id={id}
         name="queryType"
+        value={id}
       />
       <Image src={src} width={40} height={40} className="size-[40px]" alt="icon" />
       <div className="flex flex-col">

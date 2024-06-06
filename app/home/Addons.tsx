@@ -42,6 +42,7 @@ export default function Addons() {
                   }}
                   title={undefined}
                   id={field}
+                  name={field}
                   className="absolute size-0"
                   type="checkbox"
                 />
