@@ -2,7 +2,7 @@
 import { useContext } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
 export default function YourInfo() {
-  const { yourInfoRef, nameRef, mailRef, telRef } = useContext(DataContext);
+  const { refYourInfo, refName, refMail, refTel } = useContext(DataContext);
   const items = {
     title: 'Personal info',
     description: 'Please provide your name, email address, and phone number.',
@@ -27,7 +27,7 @@ export default function YourInfo() {
   };
   return (
     <div
-      ref={yourInfoRef}
+      ref={refYourInfo}
       className="yourInfo selected mt-[40px] flex h-[348px] w-full max-w-[450px] flex-col gap-[40px]"
     >
       <header className="flex h-[68px] flex-col gap-[11px]">
@@ -38,8 +38,8 @@ export default function YourInfo() {
         <div className="inputDiv">
           <label htmlFor={items.field1.id}>{items.field1.label}</label>
           <input
-            onChange={() => nameRef.current?.classList.remove('errorInput')}
-            ref={nameRef}
+            onChange={() => refName.current?.classList.remove('errorInput')}
+            ref={refName}
             id={items.field1.id}
             name={items.field1.id}
             type={items.field1.type}
@@ -50,8 +50,8 @@ export default function YourInfo() {
         <div className="inputDiv">
           <label htmlFor={items.field2.id}>{items.field2.label}</label>
           <input
-            onChange={() => mailRef.current?.classList.remove('errorInput')}
-            ref={mailRef}
+            onChange={() => refMail.current?.classList.remove('errorInput')}
+            ref={refMail}
             id={items.field2.id}
             name={items.field2.id}
             type={items.field2.type}
@@ -62,8 +62,8 @@ export default function YourInfo() {
         <div className="inputDiv">
           <label htmlFor={items.field3.id}>{items.field3.label}</label>
           <input
-            onChange={() => telRef.current?.classList.remove('errorInput')}
-            ref={telRef}
+            onChange={() => refTel.current?.classList.remove('errorInput')}
+            ref={refTel}
             id={items.field3.id}
             name={items.field3.id}
             type={items.field3.type}

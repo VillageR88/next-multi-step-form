@@ -3,14 +3,14 @@ import { useContext } from 'react';
 import { DataContext, costFormatted, itemsSummary, itemsAddons } from '@/app/_providers/DataContext';
 
 export default function Summary() {
-  const { summaryRef, billing, plan, selectPlanRef, addons, refButtonNext, refButtonConfirm } = useContext(DataContext);
+  const { refSummary, billing, plan, refSelectPlan, addons, refButtonNext, refButtonConfirm } = useContext(DataContext);
 
   const billingText = billing ? itemsSummary.billing.yearly : itemsSummary.billing.monthly;
   const anyChecked = addons.onlineService.checked || addons.largerStorage.checked || addons.customizableProfile.checked;
   const totalTitle = 'Total ' + (billing ? '(per year)' : '(per month)');
   return (
     <div
-      ref={summaryRef}
+      ref={refSummary}
       className={`group/1 summary mt-[40px] hidden h-[348px] w-full max-w-[450px] flex-col gap-[40px]`}
     >
       <header className="flex h-[68px] flex-col gap-[11px]">
@@ -24,13 +24,13 @@ export default function Summary() {
               <h2>{plan && plan[0][0].toUpperCase() + plan[0].slice(1) + billingText.toString()}</h2>
               <button
                 onClick={() => {
-                  if (!summaryRef.current || !selectPlanRef.current) return;
-                  summaryRef.current.classList.remove('selected');
-                  summaryRef.current.classList.add('hidden');
-                  summaryRef.current.classList.remove('flex');
-                  selectPlanRef.current.classList.add('selected');
-                  selectPlanRef.current.classList.remove('hidden');
-                  selectPlanRef.current.classList.add('flex');
+                  if (!refSummary.current || !refSelectPlan.current) return;
+                  refSummary.current.classList.remove('selected');
+                  refSummary.current.classList.add('hidden');
+                  refSummary.current.classList.remove('flex');
+                  refSelectPlan.current.classList.add('selected');
+                  refSelectPlan.current.classList.remove('hidden');
+                  refSelectPlan.current.classList.add('flex');
                   refButtonNext.current?.classList.remove('hidden');
                   refButtonConfirm.current?.classList.add('hidden');
                   refButtonConfirm.current?.classList.remove('flex');

@@ -33,14 +33,14 @@ const SubmitButton = ({ refButtonConfirm }: { refButtonConfirm: React.RefObject<
 export default function LayoutHome({ children }: { children: ReactNode }) {
   const refDivButtons = createRef<HTMLDivElement>();
   const {
-    yourInfoRef,
-    selectPlanRef,
-    addOnsRef,
-    summaryRef,
+    refYourInfo,
+    refSelectPlan,
+    refAddons,
+    refSummary,
     refThankYou,
-    nameRef,
-    mailRef,
-    telRef,
+    refName,
+    refMail,
+    refTel,
     refButtonConfirm,
     refButtonNext,
     refButtonPrevious,
@@ -79,10 +79,10 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
       refDivButtons.current.classList.add('hidden');
       refThankYou.current?.classList.remove('hidden');
       refThankYou.current?.classList.add('flex');
-      summaryRef.current?.classList.add('hidden');
-      summaryRef.current?.classList.remove('flex');
+      refSummary.current?.classList.add('hidden');
+      refSummary.current?.classList.remove('flex');
     }
-  }, [refDivButtons, refThankYou, state.redirection, summaryRef]);
+  }, [refDivButtons, refThankYou, state.redirection, refSummary]);
 
   return (
     <main className="group/home relative z-0 flex min-h-dvh flex-col items-center justify-center overflow-x-clip px-6 font-ubuntu sm:min-h-screen">
@@ -116,33 +116,33 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
             <button
               onClick={() => {
                 if (
-                  selectPlanRef.current &&
-                  selectPlanRef.current.classList.contains('selected') &&
-                  yourInfoRef.current
+                  refSelectPlan.current &&
+                  refSelectPlan.current.classList.contains('selected') &&
+                  refYourInfo.current
                 ) {
                   refButtonPrevious.current?.classList.add('invisible');
-                  selectPlanRef.current.classList.remove('selected');
-                  selectPlanRef.current.classList.add('hidden');
-                  selectPlanRef.current.classList.remove('flex');
-                  yourInfoRef.current.classList.add('selected');
-                  yourInfoRef.current.classList.remove('hidden');
-                  yourInfoRef.current.classList.add('flex');
+                  refSelectPlan.current.classList.remove('selected');
+                  refSelectPlan.current.classList.add('hidden');
+                  refSelectPlan.current.classList.remove('flex');
+                  refYourInfo.current.classList.add('selected');
+                  refYourInfo.current.classList.remove('hidden');
+                  refYourInfo.current.classList.add('flex');
                 }
-                if (addOnsRef.current && addOnsRef.current.classList.contains('selected') && selectPlanRef.current) {
-                  addOnsRef.current.classList.remove('selected');
-                  addOnsRef.current.classList.add('hidden');
-                  addOnsRef.current.classList.remove('flex');
-                  selectPlanRef.current.classList.add('selected');
-                  selectPlanRef.current.classList.remove('hidden');
-                  selectPlanRef.current.classList.add('flex');
+                if (refAddons.current && refAddons.current.classList.contains('selected') && refSelectPlan.current) {
+                  refAddons.current.classList.remove('selected');
+                  refAddons.current.classList.add('hidden');
+                  refAddons.current.classList.remove('flex');
+                  refSelectPlan.current.classList.add('selected');
+                  refSelectPlan.current.classList.remove('hidden');
+                  refSelectPlan.current.classList.add('flex');
                 }
-                if (summaryRef.current && summaryRef.current.classList.contains('selected') && addOnsRef.current) {
-                  summaryRef.current.classList.remove('selected');
-                  summaryRef.current.classList.add('hidden');
-                  summaryRef.current.classList.remove('flex');
-                  addOnsRef.current.classList.add('selected');
-                  addOnsRef.current.classList.remove('hidden');
-                  addOnsRef.current.classList.add('flex');
+                if (refSummary.current && refSummary.current.classList.contains('selected') && refAddons.current) {
+                  refSummary.current.classList.remove('selected');
+                  refSummary.current.classList.add('hidden');
+                  refSummary.current.classList.remove('flex');
+                  refAddons.current.classList.add('selected');
+                  refAddons.current.classList.remove('hidden');
+                  refAddons.current.classList.add('flex');
                   refButtonNext.current?.classList.remove('hidden');
                   refButtonConfirm.current?.classList.remove('flex');
                   refButtonConfirm.current?.classList.add('hidden');
@@ -158,17 +158,17 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
               ref={refButtonNext}
               onClick={() => {
                 if (
-                  yourInfoRef.current &&
-                  yourInfoRef.current.classList.contains('selected') &&
-                  selectPlanRef.current
+                  refYourInfo.current &&
+                  refYourInfo.current.classList.contains('selected') &&
+                  refSelectPlan.current
                 ) {
                   let error = false;
-                  if (telRef.current?.value === '') {
-                    telRef.current.classList.add('errorInput');
-                    telRef.current.focus();
+                  if (refTel.current?.value === '') {
+                    refTel.current.classList.add('errorInput');
+                    refTel.current.focus();
                     error = true;
                   }
-                  let telFormatted = telRef.current?.value;
+                  let telFormatted = refTel.current?.value;
                   if (telFormatted) {
                     telFormatted = telFormatted.replaceAll(' ', '');
                     telFormatted = telFormatted.replaceAll('-', '');
@@ -176,49 +176,49 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
                     telFormatted = telFormatted.replaceAll('(', '');
                     telFormatted = telFormatted.replaceAll(')', '');
                   }
-                  if (telRef.current && telFormatted && !/^\d{7,15}$/.test(telFormatted)) {
-                    telRef.current.classList.add('errorInput');
-                    telRef.current.focus();
+                  if (refTel.current && telFormatted && !/^\d{7,15}$/.test(telFormatted)) {
+                    refTel.current.classList.add('errorInput');
+                    refTel.current.focus();
                     error = true;
                   }
-                  if (mailRef.current && mailRef.current.value === '') {
-                    mailRef.current.classList.add('errorInput');
-                    mailRef.current.focus();
+                  if (refMail.current && refMail.current.value === '') {
+                    refMail.current.classList.add('errorInput');
+                    refMail.current.focus();
                     error = true;
                   }
-                  if (mailRef.current && !/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/.test(mailRef.current.value)) {
-                    mailRef.current.classList.add('errorInput');
-                    mailRef.current.focus();
+                  if (refMail.current && !/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/.test(refMail.current.value)) {
+                    refMail.current.classList.add('errorInput');
+                    refMail.current.focus();
                     error = true;
                   }
-                  if (nameRef.current && nameRef.current.value === '') {
-                    nameRef.current.classList.add('errorInput');
-                    nameRef.current.focus();
+                  if (refName.current && refName.current.value === '') {
+                    refName.current.classList.add('errorInput');
+                    refName.current.focus();
                     error = true;
                   }
                   //debug
                   if (!error) return;
                   refButtonPrevious.current?.classList.remove('invisible');
-                  yourInfoRef.current.classList.remove('selected');
-                  yourInfoRef.current.classList.add('hidden');
-                  yourInfoRef.current.classList.remove('flex');
-                  selectPlanRef.current.classList.add('selected');
-                  selectPlanRef.current.classList.remove('hidden');
-                  selectPlanRef.current.classList.add('flex');
-                } else if (selectPlanRef.current?.classList.contains('selected') && addOnsRef.current) {
-                  selectPlanRef.current.classList.remove('selected');
-                  selectPlanRef.current.classList.add('hidden');
-                  selectPlanRef.current.classList.remove('flex');
-                  addOnsRef.current.classList.add('selected');
-                  addOnsRef.current.classList.remove('hidden');
-                  addOnsRef.current.classList.add('flex');
-                } else if (addOnsRef.current?.classList.contains('selected') && summaryRef.current) {
-                  addOnsRef.current.classList.remove('selected');
-                  addOnsRef.current.classList.add('hidden');
-                  addOnsRef.current.classList.remove('flex');
-                  summaryRef.current.classList.add('selected');
-                  summaryRef.current.classList.remove('hidden');
-                  summaryRef.current.classList.add('flex');
+                  refYourInfo.current.classList.remove('selected');
+                  refYourInfo.current.classList.add('hidden');
+                  refYourInfo.current.classList.remove('flex');
+                  refSelectPlan.current.classList.add('selected');
+                  refSelectPlan.current.classList.remove('hidden');
+                  refSelectPlan.current.classList.add('flex');
+                } else if (refSelectPlan.current?.classList.contains('selected') && refAddons.current) {
+                  refSelectPlan.current.classList.remove('selected');
+                  refSelectPlan.current.classList.add('hidden');
+                  refSelectPlan.current.classList.remove('flex');
+                  refAddons.current.classList.add('selected');
+                  refAddons.current.classList.remove('hidden');
+                  refAddons.current.classList.add('flex');
+                } else if (refAddons.current?.classList.contains('selected') && refSummary.current) {
+                  refAddons.current.classList.remove('selected');
+                  refAddons.current.classList.add('hidden');
+                  refAddons.current.classList.remove('flex');
+                  refSummary.current.classList.add('selected');
+                  refSummary.current.classList.remove('hidden');
+                  refSummary.current.classList.add('flex');
                   refButtonNext.current?.classList.add('hidden');
                   refButtonConfirm.current?.classList.remove('hidden');
                   refButtonConfirm.current?.classList.add('flex');

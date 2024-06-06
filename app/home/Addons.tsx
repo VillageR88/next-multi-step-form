@@ -5,7 +5,7 @@ import Image from 'next/image';
 import imageCheckmark from '@/public/assets/images/icon-checkmark.svg';
 
 export default function Addons() {
-  const { addOnsRef, billing, setAddons } = useContext(DataContext);
+  const { refAddons, billing, setAddons } = useContext(DataContext);
 
   const formatCost = (cost: number) => {
     const amount = billing ? cost * 10 : cost;
@@ -16,7 +16,7 @@ export default function Addons() {
 
   return (
     <div
-      ref={addOnsRef}
+      ref={refAddons}
       className={`group/1 addons mt-[40px] hidden h-[348px] w-full max-w-[450px] flex-col gap-[40px]`}
     >
       <header className="flex h-[68px] flex-col gap-[11px]">

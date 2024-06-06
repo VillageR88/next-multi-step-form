@@ -58,7 +58,7 @@ export default function SelectPlan() {
   useEffect(() => {
     if (radioRef.current.length) radioRef.current[0].checked = true;
   }, []);
-  const { selectPlanRef, billing, setBilling, setPlan, setAddons } = useContext(DataContext);
+  const { refSelectPlan, billing, setBilling, setPlan, setAddons } = useContext(DataContext);
 
   const billingType = {
     monthly: 'Monthly',
@@ -66,7 +66,7 @@ export default function SelectPlan() {
   };
   return (
     <div
-      ref={selectPlanRef}
+      ref={refSelectPlan}
       className={`group/1 selectPlan mt-[40px] hidden h-[348px] w-full max-w-[450px] flex-col gap-[40px]`}
     >
       <header className="flex h-[68px] flex-col gap-[11px]">

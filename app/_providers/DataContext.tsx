@@ -123,14 +123,14 @@ export const costFormatted = ({
 //const items = Object.values(Steps);
 export const DataContext = createContext(
   {} as {
-    yourInfoRef: RefObject<HTMLDivElement>;
-    selectPlanRef: RefObject<HTMLDivElement>;
-    addOnsRef: RefObject<HTMLDivElement>;
-    summaryRef: RefObject<HTMLDivElement>;
+    refYourInfo: RefObject<HTMLDivElement>;
+    refSelectPlan: RefObject<HTMLDivElement>;
+    refAddons: RefObject<HTMLDivElement>;
+    refSummary: RefObject<HTMLDivElement>;
     refThankYou: RefObject<HTMLDivElement>;
-    nameRef: RefObject<HTMLInputElement>;
-    mailRef: RefObject<HTMLInputElement>;
-    telRef: RefObject<HTMLInputElement>;
+    refName: RefObject<HTMLInputElement>;
+    refMail: RefObject<HTMLInputElement>;
+    refTel: RefObject<HTMLInputElement>;
     refButtonNext: RefObject<HTMLButtonElement>;
     refButtonPrevious: RefObject<HTMLButtonElement>;
     refButtonConfirm: RefObject<HTMLButtonElement>;
@@ -166,14 +166,14 @@ export default function DataProvider({ children }: { children: ReactNode }) {
     customizableProfile: { checked: false, cost: 2 },
   });
 
-  const yourInfoRef = useRef<HTMLDivElement>(null);
-  const selectPlanRef = useRef<HTMLDivElement>(null);
-  const addOnsRef = useRef<HTMLDivElement>(null);
-  const summaryRef = useRef<HTMLDivElement>(null);
+  const refYourInfo = useRef<HTMLDivElement>(null);
+  const refSelectPlan = useRef<HTMLDivElement>(null);
+  const refAddons = useRef<HTMLDivElement>(null);
+  const refSummary = useRef<HTMLDivElement>(null);
   const refThankYou = useRef<HTMLDivElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const mailRef = useRef<HTMLInputElement>(null);
-  const telRef = useRef<HTMLInputElement>(null);
+  const refName = useRef<HTMLInputElement>(null);
+  const refMail = useRef<HTMLInputElement>(null);
+  const refTel = useRef<HTMLInputElement>(null);
   const refButtonNext = useRef<HTMLButtonElement>(null);
   const refButtonPrevious = useRef<HTMLButtonElement>(null);
   const refButtonConfirm = useRef<HTMLButtonElement>(null);
@@ -181,14 +181,14 @@ export default function DataProvider({ children }: { children: ReactNode }) {
   return (
     <DataContext.Provider
       value={{
-        yourInfoRef,
-        selectPlanRef,
-        addOnsRef,
-        summaryRef,
+        refYourInfo,
+        refSelectPlan,
+        refAddons,
+        refSummary,
         refThankYou,
-        nameRef,
-        mailRef,
-        telRef,
+        refName,
+        refMail,
+        refTel,
         refButtonNext,
         refButtonPrevious,
         refButtonConfirm,
