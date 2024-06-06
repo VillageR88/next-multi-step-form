@@ -26,15 +26,16 @@ export interface tAddons {
 export interface tItemsAddons {
   title: string;
   description: string;
-  fields: {
-    id: string;
-    title: string;
-    description?: string;
-    costMonthly: number;
-    costYearly?: number;
-    src?: string;
-  }[];
+  fields: Record<
+    string,
+    {
+      title: string;
+      description: string;
+      costMonthly: number;
+    }
+  >;
 }
+[];
 
 export interface tItemsSelectPlan {
   title: string;
@@ -54,26 +55,23 @@ export interface tItemsSelectPlan {
 export const itemsAddons: tItemsAddons = {
   title: 'Pick add-ons',
   description: 'Add-ons help enhance your gaming experience.',
-  fields: [
-    {
-      id: 'onlineService',
+  fields: {
+    onlineService: {
       title: 'Online service',
       description: 'Access to multiplayer games',
       costMonthly: 1,
     },
-    {
-      id: 'largerStorage',
+    largerStorage: {
       title: 'Larger storage',
       description: 'Extra 1TB of cloud save',
       costMonthly: 1,
     },
-    {
-      id: 'customizableProfile',
+    customizableProfile: {
       title: 'Customizable profile',
       description: 'Custom theme on your profile',
       costMonthly: 2,
     },
-  ],
+  },
 };
 
 export const itemsSelectPlan: tItemsSelectPlan = {

@@ -25,46 +25,50 @@ export default function Addons() {
         <p>{items.description}</p>
       </header>
       <ul className="flex flex-col gap-[16px]">
-        {items.fields.map((field, index) => (
-          <li className="flex" key={index}>
-            <label htmlFor={field.id} className="checkParent group flex items-center gap-[24px] px-[24px]">
-              <input
-                onChange={(e) => {
-                  setAddons(
-                    (prev: tAddons) =>
-                      ({
-                        ...prev,
-                        [field.id]: {
-                          checked: e.target.checked,
-                          cost: billing ? field.costMonthly * 10 : field.costMonthly,
-                        },
-                      }) as tAddons,
-                  );
-                }}
-                title={undefined}
-                id={field.id}
-                className="absolute size-0"
-                type="checkbox"
-              />
-              <div className="flex h-[20px] min-w-[20px] select-none items-center justify-center rounded-[4px] border border-[#D6D9E6] bg-transparent group-has-[input:checked]:border-[#483EFF] group-has-[input:checked]:bg-[#483EFF]">
-                <Image
-                  alt="checkbox"
-                  className="h-[9px] w-[12px]"
-                  width={12}
-                  height={9}
-                  src={imageCheckmark as string}
+        {Object.keys(items.fields).map((field, index) => {
+          const item = items.fields[field];
+
+          return (
+            <li className="flex" key={index}>
+              <label htmlFor={field} className="checkParent group flex items-center gap-[24px] px-[24px]">
+                <input
+                  onChange={(e) => {
+                    setAddons(
+                      (prev) =>
+                        ({
+                          ...prev,
+                          [field]: {
+                            checked: e.target.checked,
+                            cost: billing ? item.costMonthly * 10 : item.costMonthly,
+                          },
+                        }) as tAddons,
+                    );
+                  }}
+                  title={undefined}
+                  id={field}
+                  className="absolute size-0"
+                  type="checkbox"
                 />
-              </div>
-              <div className="flex w-full items-center justify-between">
-                <div className="flex flex-col gap-[7px]">
-                  <h2>{field.title}</h2>
-                  <p>{field.description}</p>
+                <div className="flex h-[20px] min-w-[20px] select-none items-center justify-center rounded-[4px] border border-[#D6D9E6] bg-transparent group-has-[input:checked]:border-[#483EFF] group-has-[input:checked]:bg-[#483EFF]">
+                  <Image
+                    alt="checkbox"
+                    className="h-[9px] w-[12px]"
+                    width={12}
+                    height={9}
+                    src={imageCheckmark as string}
+                  />
                 </div>
-                <span className="addonCost">{formatCost(field.costMonthly)}</span>
-              </div>
-            </label>
-          </li>
-        ))}
+                <div className="flex w-full items-center justify-between">
+                  <div className="flex flex-col gap-[7px]">
+                    <h2>{item.title}</h2>
+                    <p>{item.description}</p>
+                  </div>
+                  <span className="addonCost">{formatCost(item.costMonthly)}</span>
+                </div>
+              </label>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

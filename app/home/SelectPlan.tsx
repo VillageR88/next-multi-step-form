@@ -1,9 +1,8 @@
 'use client';
 import { useContext } from 'react';
-import { DataContext, costFormatted, itemsSelectPlan, itemsAddons } from '@/app/_providers/DataContext';
+import { DataContext, costFormatted, itemsSelectPlan } from '@/app/_providers/DataContext';
 import { Plan } from '@/app/_providers/DataContext';
 import Image from 'next/image';
-import type { tAddons } from '@/app/_providers/DataContext';
 
 const RadioInput = ({
   id,
@@ -106,23 +105,20 @@ export default function SelectPlan() {
                   newPrev[1] = billing ? plan.costMonthly : plan.costYearly;
                   return newPrev;
                 });
-                setAddons(
-                  (prev: tAddons) =>
-                    ({
-                      onlineService: {
-                        checked: prev.onlineService.checked,
-                        cost: billing ? itemsAddons.fields[0].costMonthly : itemsAddons.fields[0].costMonthly * 10,
-                      },
-                      largerStorage: {
-                        checked: prev.largerStorage.checked,
-                        cost: billing ? itemsAddons.fields[1].costMonthly : itemsAddons.fields[1].costMonthly * 10,
-                      },
-                      customizableProfile: {
-                        checked: prev.customizableProfile.checked,
-                        cost: billing ? itemsAddons.fields[2].costMonthly : itemsAddons.fields[2].costMonthly * 10,
-                      },
-                    }) as tAddons,
-                );
+                setAddons((prev) => ({
+                  onlineService: {
+                    checked: prev.onlineService.checked,
+                    cost: billing ? prev.onlineService.cost / 10 : prev.onlineService.cost * 10,
+                  },
+                  largerStorage: {
+                    checked: prev.largerStorage.checked,
+                    cost: billing ? prev.largerStorage.cost / 10 : prev.largerStorage.cost * 10,
+                  },
+                  customizableProfile: {
+                    checked: prev.customizableProfile.checked,
+                    cost: billing ? prev.customizableProfile.cost / 10 : prev.customizableProfile.cost * 10,
+                  },
+                }));
               }}
               title={undefined}
               className="size-[12px] -translate-x-2 cursor-pointer appearance-none rounded-full bg-white transition checked:translate-x-2"
