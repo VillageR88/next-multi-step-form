@@ -25,24 +25,26 @@ export async function CreateInvoiceContactForm(
   const onlineService = formData.get('onlineService') as string;
   const largerStorage = formData.get('largerStorage') as string;
   const customizableProfile = formData.get('customizableProfile') as string;
-  const queryType = formData.get('queryType') as string;
-  console.log('name: ', name);
-  console.log('email: ', email);
-  console.log('billing: ', billing);
-  console.log('billing: ', billing ? 'Yearly' : 'Monthly');
-  console.log('onlineService: ', onlineService);
-  console.log('largerStorage: ', largerStorage);
-  console.log('customizableProfile: ', customizableProfile);
-  console.log('queryType: ', queryType);
+  let queryType = formData.get('queryType') as string;
+  queryType = queryType[0].toUpperCase() + queryType.slice(1);
 
-  //INFO: billing gets null or on;
-  return prev;
-  //const phone = formData.get('phone') as string;
-
-  //if (!company) errorData = { ...errorData, company: true };
-  //else errorData = { ...errorData, company: false };
-
-  const htmlContent = `Hello ${name}<br/><br/>Thank you for selecting ${sum.toString()} as your product!<br/><br/>Thank you for contacting us. We will get back to you as soon as possible.<br/><br/> If you received this email by mistake, please ignore it.<br/><br/>Best regards,<br/><br/><a href="https://www.frontendmentor.io/profile/VillageR88">VillageR88</a><br/>`;
+  const htmlContentLine1 = `Hello ${name}<br/><br/>`;
+  const appendix = onlineService || largerStorage || customizableProfile ? ' with the following options:' : '';
+  const htmlContentLine2 = `You have selected the ${queryType} plan${appendix}<br/>`;
+  const htmlContentLine3 = onlineService ? '- online service<br/>' : '';
+  const htmlContentLine4 = largerStorage ? '- larger storage<br/> ' : '';
+  const htmlContentLine5 = customizableProfile ? '- customizable profile<br/> ' : '';
+  const htmlContentLine6 = `for a total of ${sum.toString() + '$ per'} ${billing ? 'year' : 'month.'}<br/><br/>`;
+  const htmlContentLine7 = `Thank you for contacting us. We will get back to you as soon as possible.<br/><br/> If you received this email by mistake, please ignore it.<br/><br/>Best regards,<br/><br/><a href="https://www.frontendmentor.io/profile/VillageR88">VillageR88</a><br/>`;
+  const htmlContent =
+    htmlContentLine1 +
+    htmlContentLine2 +
+    htmlContentLine3 +
+    htmlContentLine4 +
+    htmlContentLine5 +
+    htmlContentLine6 +
+    htmlContentLine7;
+  console.log(htmlContent);
   const mailOptions = {
     from: process.env.EMAIL,
     to: email,

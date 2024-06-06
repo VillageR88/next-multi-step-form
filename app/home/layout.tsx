@@ -47,7 +47,6 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
   } = useContext(DataContext);
   const sum =
     (plan && plan[1] + Object.values(addons).reduce((acc, cur) => (cur.checked ? acc + cur.cost : acc), 0)) ?? 0;
-
   const [state, action] = useFormState<
     {
       number: number;
@@ -58,7 +57,6 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
     number: 0,
     redirection: false,
   });
-  //console.log(state);
 
   const circleArray = ['circle1', 'circle2', 'circle3', 'circle4'];
 
