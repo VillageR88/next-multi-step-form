@@ -127,6 +127,7 @@ export const DataContext = createContext(
     selectPlanRef: RefObject<HTMLDivElement>;
     addOnsRef: RefObject<HTMLDivElement>;
     summaryRef: RefObject<HTMLDivElement>;
+    refThankYou: RefObject<HTMLDivElement>;
     nameRef: RefObject<HTMLInputElement>;
     mailRef: RefObject<HTMLInputElement>;
     telRef: RefObject<HTMLInputElement>;
@@ -169,6 +170,7 @@ export default function DataProvider({ children }: { children: ReactNode }) {
   const selectPlanRef = useRef<HTMLDivElement>(null);
   const addOnsRef = useRef<HTMLDivElement>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
+  const refThankYou = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const mailRef = useRef<HTMLInputElement>(null);
   const telRef = useRef<HTMLInputElement>(null);
@@ -183,6 +185,7 @@ export default function DataProvider({ children }: { children: ReactNode }) {
         selectPlanRef,
         addOnsRef,
         summaryRef,
+        refThankYou,
         nameRef,
         mailRef,
         telRef,

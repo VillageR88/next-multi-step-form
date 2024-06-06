@@ -1,5 +1,5 @@
 'use client';
-import { ReactNode, useContext } from 'react';
+import { ReactNode, createRef, useContext, useEffect } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
 import Image from 'next/image';
 import imageSidebarDesktop from '@/public/assets/images/bg-sidebar-desktop.svg';
@@ -31,11 +31,13 @@ const SubmitButton = ({ refButtonConfirm }: { refButtonConfirm: React.RefObject<
 };
 
 export default function LayoutHome({ children }: { children: ReactNode }) {
+  const refDivButtons = createRef<HTMLDivElement>();
   const {
     yourInfoRef,
     selectPlanRef,
     addOnsRef,
     summaryRef,
+    refThankYou,
     nameRef,
     mailRef,
     telRef,
@@ -72,6 +74,16 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
     );
   };
 
+  useEffect(() => {
+    if (state.redirection && refDivButtons.current) {
+      refDivButtons.current.classList.add('hidden');
+      refThankYou.current?.classList.remove('hidden');
+      refThankYou.current?.classList.add('flex');
+      summaryRef.current?.classList.add('hidden');
+      summaryRef.current?.classList.remove('flex');
+    }
+  }, [refDivButtons, refThankYou, state.redirection, summaryRef]);
+
   return (
     <main className="group/home relative z-0 flex min-h-dvh flex-col items-center justify-center overflow-x-clip px-6 font-ubuntu sm:min-h-screen">
       <form
@@ -100,7 +112,7 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
         </div>
         <div className="flex size-full flex-col pb-[16px]">
           <div className="size-full">{children}</div>
-          <div className="flex h-[48px] w-full items-center justify-between">
+          <div ref={refDivButtons} className="flex h-[48px] w-full items-center justify-between">
             <button
               onClick={() => {
                 if (

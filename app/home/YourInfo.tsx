@@ -25,7 +25,6 @@ export default function YourInfo() {
       type: 'tel',
     },
   };
-
   return (
     <div
       ref={yourInfoRef}

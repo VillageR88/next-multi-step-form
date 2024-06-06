@@ -110,6 +110,7 @@ input[type='radio'] {
 .yourInfo,
 .addons,
 .selectPlan,
-.summary {
+.summary,
+.selected {
   @apply cursor-default;
 }
