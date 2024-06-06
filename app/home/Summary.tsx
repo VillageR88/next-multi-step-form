@@ -1,6 +1,6 @@
 'use client';
 import { useContext } from 'react';
-import { DataContext, costFormatted, itemsSummary } from '@/app/_providers/DataContext';
+import { DataContext, costFormatted, itemsSummary, itemsAddons } from '@/app/_providers/DataContext';
 
 export default function Summary() {
   const { summaryRef, billing, plan, selectPlanRef, addons, refButtonNext, refButtonConfirm } = useContext(DataContext);
@@ -54,7 +54,7 @@ export default function Summary() {
                 return (
                   addons[key as keyof typeof addons].checked && (
                     <div key={key} className="flex justify-between">
-                      <p>{key}</p>
+                      <p>{Object.values(itemsAddons.fields[key].title)}</p>
                       <p className="text-[#022959]">
                         {costFormatted({
                           cost: Object.entries(addons).filter((x) => x[0] === key)[0][1].cost,
