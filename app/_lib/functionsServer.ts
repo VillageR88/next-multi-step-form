@@ -15,10 +15,7 @@ export async function CreateInvoiceContactForm(
       pass: process.env.PASSWORD,
     },
   });
-  //debug
-
   if (!process.env.EMAIL) return prev;
-
   const name = formData.get('name') as string;
   const email = formData.get('email') as string;
   const billing = formData.get('billing') as string;
@@ -27,7 +24,6 @@ export async function CreateInvoiceContactForm(
   const customizableProfile = formData.get('customizableProfile') as string;
   let queryType = formData.get('queryType') as string;
   queryType = queryType[0].toUpperCase() + queryType.slice(1);
-
   const htmlContentLine1 = `Hello ${name}<br/><br/>`;
   const appendix = onlineService || largerStorage || customizableProfile ? ' with the following options:' : '';
   const htmlContentLine2 = `You have selected the ${queryType} plan${appendix}<br/>`;
@@ -44,7 +40,6 @@ export async function CreateInvoiceContactForm(
     htmlContentLine5 +
     htmlContentLine6 +
     htmlContentLine7;
-  console.log(htmlContent);
   const mailOptions = {
     from: process.env.EMAIL,
     to: email,
