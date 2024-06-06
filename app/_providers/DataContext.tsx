@@ -130,6 +130,9 @@ export const DataContext = createContext(
     nameRef: RefObject<HTMLInputElement>;
     mailRef: RefObject<HTMLInputElement>;
     telRef: RefObject<HTMLInputElement>;
+    refButtonNext: RefObject<HTMLButtonElement>;
+    refButtonPrevious: RefObject<HTMLButtonElement>;
+    refButtonConfirm: RefObject<HTMLButtonElement>;
     billing: boolean;
     setBilling: Dispatch<SetStateAction<boolean>>;
     plan: [Plan, number] | undefined;
@@ -169,6 +172,9 @@ export default function DataProvider({ children }: { children: ReactNode }) {
   const nameRef = useRef<HTMLInputElement>(null);
   const mailRef = useRef<HTMLInputElement>(null);
   const telRef = useRef<HTMLInputElement>(null);
+  const refButtonNext = useRef<HTMLButtonElement>(null);
+  const refButtonPrevious = useRef<HTMLButtonElement>(null);
+  const refButtonConfirm = useRef<HTMLButtonElement>(null);
 
   return (
     <DataContext.Provider
@@ -180,6 +186,9 @@ export default function DataProvider({ children }: { children: ReactNode }) {
         nameRef,
         mailRef,
         telRef,
+        refButtonNext,
+        refButtonPrevious,
+        refButtonConfirm,
         billing,
         setBilling,
         plan,

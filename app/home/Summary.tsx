@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { DataContext, costFormatted, itemsSummary } from '@/app/_providers/DataContext';
 
 export default function Summary() {
-  const { summaryRef, billing, plan, selectPlanRef, addons } = useContext(DataContext);
+  const { summaryRef, billing, plan, selectPlanRef, addons, refButtonNext, refButtonConfirm } = useContext(DataContext);
 
   const billingText = billing ? itemsSummary.billing.yearly : itemsSummary.billing.monthly;
   const anyChecked = addons.onlineService.checked || addons.largerStorage.checked || addons.customizableProfile.checked;
@@ -31,6 +31,8 @@ export default function Summary() {
                   selectPlanRef.current.classList.add('selected');
                   selectPlanRef.current.classList.remove('hidden');
                   selectPlanRef.current.classList.add('flex');
+                  refButtonNext.current?.classList.remove('hidden');
+                  refButtonConfirm.current?.classList.add('hidden');
                 }}
                 type="button"
                 className="w-fit text-[14px] leading-[20px] text-[#9699AA] underline underline-offset-2"

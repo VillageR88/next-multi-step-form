@@ -1,26 +1,36 @@
 'use client';
-import { ReactNode, useContext, useRef } from 'react';
+import { ReactNode, useContext } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
 import Image from 'next/image';
 import imageSidebarDesktop from '@/public/assets/images/bg-sidebar-desktop.svg';
 import { Steps } from '@/app/_providers/DataContext';
 
 export default function LayoutHome({ children }: { children: ReactNode }) {
-  const { yourInfoRef, selectPlanRef, addOnsRef, summaryRef, nameRef, mailRef, telRef } = useContext(DataContext);
-  const refArray = ['circle1', 'circle2', 'circle3', 'circle4'];
+  const {
+    yourInfoRef,
+    selectPlanRef,
+    addOnsRef,
+    summaryRef,
+    nameRef,
+    mailRef,
+    telRef,
+    refButtonConfirm,
+    refButtonNext,
+    refButtonPrevious,
+  } = useContext(DataContext);
+  const circleArray = ['circle1', 'circle2', 'circle3', 'circle4'];
 
-  const previousButtonRef = useRef<HTMLButtonElement>(null);
-  const nextButtonRef = useRef<HTMLButtonElement>(null);
   const items = Object.values(Steps);
   const titles = {
     step: 'STEP ',
     buttonPrevious: 'Go Back',
     buttonNext: 'Next Step',
+    confirm: 'Confirm',
   };
   const Circle = ({ index }: { index: number }) => {
     return (
       <div
-        className={`${refArray[index]} flex size-[33px] items-center justify-center rounded-full border border-white text-[14px] font-bold text-white`}
+        className={`${circleArray[index]} flex size-[33px] items-center justify-center rounded-full border border-white text-[14px] font-bold text-white`}
       >
         {index + 1}
       </div>
@@ -60,14 +70,13 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
                   selectPlanRef.current.classList.contains('selected') &&
                   yourInfoRef.current
                 ) {
-                  previousButtonRef.current?.classList.add('invisible');
+                  refButtonPrevious.current?.classList.add('invisible');
                   selectPlanRef.current.classList.remove('selected');
                   selectPlanRef.current.classList.add('hidden');
                   selectPlanRef.current.classList.remove('flex');
                   yourInfoRef.current.classList.add('selected');
                   yourInfoRef.current.classList.remove('hidden');
                   yourInfoRef.current.classList.add('flex');
-                  nextButtonRef.current?.classList.remove('invisible');
                 }
                 if (addOnsRef.current && addOnsRef.current.classList.contains('selected') && selectPlanRef.current) {
                   addOnsRef.current.classList.remove('selected');
@@ -84,16 +93,18 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
                   addOnsRef.current.classList.add('selected');
                   addOnsRef.current.classList.remove('hidden');
                   addOnsRef.current.classList.add('flex');
+                  refButtonNext.current?.classList.remove('hidden');
+                  refButtonConfirm.current?.classList.add('hidden');
                 }
               }}
-              ref={previousButtonRef}
+              ref={refButtonPrevious}
               type="button"
               className={`invisible h-[18px] w-[60px] text-[#9699AA]`}
             >
               {titles.buttonPrevious}
             </button>
             <button
-              ref={nextButtonRef}
+              ref={refButtonNext}
               onClick={() => {
                 if (
                   yourInfoRef.current &&
@@ -136,7 +147,7 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
                   }
                   //debug
                   if (!error) return;
-                  previousButtonRef.current?.classList.remove('invisible');
+                  refButtonPrevious.current?.classList.remove('invisible');
                   yourInfoRef.current.classList.remove('selected');
                   yourInfoRef.current.classList.add('hidden');
                   yourInfoRef.current.classList.remove('flex');
@@ -157,12 +168,22 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
                   summaryRef.current.classList.add('selected');
                   summaryRef.current.classList.remove('hidden');
                   summaryRef.current.classList.add('flex');
+                  refButtonNext.current?.classList.add('hidden');
+                  refButtonConfirm.current?.classList.remove('hidden');
                 }
               }}
               type="button"
               className="h-[48px] w-[123px] rounded-[8px] bg-[#022959] text-white"
             >
               {titles.buttonNext}
+            </button>
+            <button
+              ref={refButtonConfirm}
+              type="submit"
+              className="hidden h-[48px] w-[123px] rounded-[8px] bg-[#483EFF] text-white
+"
+            >
+              {titles.confirm}
             </button>
           </div>
         </div>
