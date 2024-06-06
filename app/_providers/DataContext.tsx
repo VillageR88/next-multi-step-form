@@ -23,7 +23,7 @@ export interface tAddons {
   customizableProfile: { checked: boolean; cost: number };
 }
 
-export interface tItemsAddons {
+interface tItemsAddons {
   title: string;
   description: string;
   fields: Record<
@@ -37,7 +37,7 @@ export interface tItemsAddons {
 }
 [];
 
-export interface tItemsSelectPlan {
+interface tItemsSelectPlan {
   title: string;
   description: string;
   fields: Record<

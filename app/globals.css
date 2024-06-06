@@ -107,7 +107,7 @@ input[type='radio'] {
 .circle4 {
   @apply group-has-[.summary.selected]/home:border-[#BEE2FD] group-has-[.summary.selected]/home:bg-[#BEE2FD] group-has-[.summary.selected]/home:text-[#022959];
 }
-
+.yourInfo,
 .addons,
 .selectPlan,
 .summary {
