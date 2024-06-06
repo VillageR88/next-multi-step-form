@@ -45,7 +45,6 @@ export interface tItemsSelectPlan {
     {
       title: string;
       costMonthly: number;
-      costYearly: number;
       src: string;
     }
   >;
@@ -81,19 +80,16 @@ export const itemsSelectPlan: tItemsSelectPlan = {
     arcade: {
       title: 'Arcade',
       costMonthly: 9,
-      costYearly: 90,
       src: imageArcade as string,
     },
     advanced: {
       title: 'Advanced',
       costMonthly: 12,
-      costYearly: 120,
       src: imageAdvanced as string,
     },
     pro: {
       title: 'Pro',
       costMonthly: 15,
-      costYearly: 150,
       src: imagePro as string,
     },
   },

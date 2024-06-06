@@ -76,7 +76,7 @@ export default function SelectPlan() {
                   id={key}
                   title={item.title}
                   costMonthly={item.costMonthly}
-                  costYearly={item.costYearly}
+                  costYearly={item.costMonthly * 10}
                   src={item.src}
                 />
               </li>
@@ -102,7 +102,7 @@ export default function SelectPlan() {
                   const newPrev = { ...prev };
                   const planId = prev[0] as string;
                   const plan = itemsSelectPlan.fields[planId];
-                  newPrev[1] = billing ? plan.costMonthly : plan.costYearly;
+                  newPrev[1] = billing ? plan.costMonthly : plan.costMonthly * 10;
                   return newPrev;
                 });
                 setAddons((prev) => ({
