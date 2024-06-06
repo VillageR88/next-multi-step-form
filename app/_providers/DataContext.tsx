@@ -131,6 +131,9 @@ export const DataContext = createContext(
     refName: RefObject<HTMLInputElement>;
     refMail: RefObject<HTMLInputElement>;
     refTel: RefObject<HTMLInputElement>;
+    refNameError: RefObject<HTMLSpanElement>;
+    refMailError: RefObject<HTMLSpanElement>;
+    refTelError: RefObject<HTMLSpanElement>;
     refButtonNext: RefObject<HTMLButtonElement>;
     refButtonPrevious: RefObject<HTMLButtonElement>;
     refButtonConfirm: RefObject<HTMLButtonElement>;
@@ -174,6 +177,9 @@ export default function DataProvider({ children }: { children: ReactNode }) {
   const refName = useRef<HTMLInputElement>(null);
   const refMail = useRef<HTMLInputElement>(null);
   const refTel = useRef<HTMLInputElement>(null);
+  const refNameError = useRef<HTMLSpanElement>(null);
+  const refMailError = useRef<HTMLSpanElement>(null);
+  const refTelError = useRef<HTMLSpanElement>(null);
   const refButtonNext = useRef<HTMLButtonElement>(null);
   const refButtonPrevious = useRef<HTMLButtonElement>(null);
   const refButtonConfirm = useRef<HTMLButtonElement>(null);
@@ -189,6 +195,9 @@ export default function DataProvider({ children }: { children: ReactNode }) {
         refName,
         refMail,
         refTel,
+        refNameError,
+        refMailError,
+        refTelError,
         refButtonNext,
         refButtonPrevious,
         refButtonConfirm,

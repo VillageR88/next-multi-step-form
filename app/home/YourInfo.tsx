@@ -2,7 +2,7 @@
 import { useContext } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
 export default function YourInfo() {
-  const { refYourInfo, refName, refMail, refTel } = useContext(DataContext);
+  const { refYourInfo, refName, refMail, refTel, refNameError, refMailError, refTelError } = useContext(DataContext);
   const items = {
     title: 'Personal info',
     description: 'Please provide your name, email address, and phone number.',
@@ -10,6 +10,7 @@ export default function YourInfo() {
       field1: {
         id: 'name',
         ref: refName,
+        refError: refNameError,
         label: 'Name',
         placeholder: 'e.g. Stephen King',
         type: 'text',
@@ -17,6 +18,7 @@ export default function YourInfo() {
       field2: {
         id: 'email',
         ref: refMail,
+        refError: refMailError,
         label: 'Email Address',
         placeholder: 'e.g. stephenking@lorem.com',
         type: 'email',
@@ -24,6 +26,7 @@ export default function YourInfo() {
       field3: {
         id: 'tel',
         ref: refTel,
+        refError: refTelError,
         label: 'Phone Number',
         placeholder: 'e.g. +1 234 567 890',
         type: 'tel',
@@ -42,10 +45,14 @@ export default function YourInfo() {
       <ul className="flex h-[264px] w-full flex-col gap-[24px]">
         {Object.values(items.fields).map((field) => (
           <li className="inputDiv" key={field.id}>
-            <label htmlFor={field.id}>{field.label}</label>
+            <div className="flex items-center justify-between">
+              <label htmlFor={field.id}>{field.label}</label>
+              <span ref={field.refError} className="text-[14px] font-bold text-[#EE374A]"></span>
+            </div>
             <input
               onChange={() => {
                 if (field.ref.current) field.ref.current.classList.remove('errorInput');
+                if (field.refError.current) field.refError.current.textContent = '';
               }}
               ref={field.ref}
               id={field.id}

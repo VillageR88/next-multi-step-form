@@ -31,6 +31,11 @@ const SubmitButton = ({ refButtonConfirm }: { refButtonConfirm: React.RefObject<
 };
 
 export default function LayoutHome({ children }: { children: ReactNode }) {
+  const errorMessages = {
+    fieldRequired: 'This field is required',
+    invalidEmail: 'Invalid email address',
+    invalidTel: 'Invalid phone number',
+  };
   const refDivButtons = createRef<HTMLDivElement>();
   const {
     refYourInfo,
@@ -41,12 +46,16 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
     refName,
     refMail,
     refTel,
+    refNameError,
+    refMailError,
+    refTelError,
     refButtonConfirm,
     refButtonNext,
     refButtonPrevious,
     plan,
     addons,
   } = useContext(DataContext);
+
   const sum =
     (plan && plan[1] + Object.values(addons).reduce((acc, cur) => (cur.checked ? acc + cur.cost : acc), 0)) ?? 0;
   const [state, action] = useFormState<
@@ -164,40 +173,45 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
                 ) {
                   let error = false;
                   if (refTel.current?.value === '') {
+                    if (refTelError.current) refTelError.current.textContent = errorMessages.fieldRequired;
                     refTel.current.classList.add('errorInput');
                     refTel.current.focus();
                     error = true;
-                  }
-                  let telFormatted = refTel.current?.value;
-                  if (telFormatted) {
+                  } else if (refTel.current) {
+                    let telFormatted = refTel.current.value;
                     telFormatted = telFormatted.replaceAll(' ', '');
                     telFormatted = telFormatted.replaceAll('-', '');
                     telFormatted = telFormatted.replaceAll('+', '');
                     telFormatted = telFormatted.replaceAll('(', '');
                     telFormatted = telFormatted.replaceAll(')', '');
-                  }
-                  if (refTel.current && telFormatted && !/^\d{7,15}$/.test(telFormatted)) {
-                    refTel.current.classList.add('errorInput');
-                    refTel.current.focus();
-                    error = true;
+                    if (!/^\d{7,15}$/.test(telFormatted)) {
+                      if (refTelError.current) refTelError.current.textContent = errorMessages.invalidTel;
+                      refTel.current.classList.add('errorInput');
+                      refTel.current.focus();
+                      error = true;
+                    }
                   }
                   if (refMail.current && refMail.current.value === '') {
+                    if (refMailError.current) refMailError.current.textContent = errorMessages.fieldRequired;
                     refMail.current.classList.add('errorInput');
                     refMail.current.focus();
                     error = true;
-                  }
-                  if (refMail.current && !/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/.test(refMail.current.value)) {
+                  } else if (
+                    refMail.current &&
+                    !/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/.test(refMail.current.value)
+                  ) {
+                    if (refMailError.current) refMailError.current.textContent = errorMessages.invalidEmail;
                     refMail.current.classList.add('errorInput');
                     refMail.current.focus();
                     error = true;
                   }
                   if (refName.current && refName.current.value === '') {
+                    if (refNameError.current) refNameError.current.textContent = errorMessages.fieldRequired;
                     refName.current.classList.add('errorInput');
                     refName.current.focus();
                     error = true;
                   }
-                  //debug
-                  if (!error) return;
+                  if (error) return;
                   refButtonPrevious.current?.classList.remove('invisible');
                   refYourInfo.current.classList.remove('selected');
                   refYourInfo.current.classList.add('hidden');
