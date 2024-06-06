@@ -1,37 +1,12 @@
 'use client';
 import { useContext } from 'react';
-import { DataContext } from '@/app/_providers/DataContext';
+import { DataContext, itemsAddons as items } from '@/app/_providers/DataContext';
 import Image from 'next/image';
 import imageCheckmark from '@/public/assets/images/icon-checkmark.svg';
 import type { tAddons } from '@/app/_providers/DataContext';
 
 export default function Addons() {
   const { addOnsRef, billing, setAddons } = useContext(DataContext);
-
-  const items = {
-    title: 'Pick add-ons',
-    description: 'Add-ons help enhance your gaming experience.',
-    fields: [
-      {
-        id: 'onlineService',
-        title: 'Online service',
-        description: 'Access to multiplayer games',
-        costMonthly: 1,
-      },
-      {
-        id: 'largerStorage',
-        title: 'Larger storage',
-        description: 'Extra 1TB of cloud save',
-        costMonthly: 1,
-      },
-      {
-        id: 'customizableProfile',
-        title: 'Customizable profile',
-        description: 'Custom theme on your profile',
-        costMonthly: 2,
-      },
-    ],
-  };
 
   const formatCost = (cost: number) => {
     const amount = billing ? cost * 10 : cost;

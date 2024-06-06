@@ -1,11 +1,9 @@
 'use client';
 import { useContext } from 'react';
-import { DataContext, costFormatted, tAddons } from '@/app/_providers/DataContext';
+import { DataContext, costFormatted, itemsSelectPlan as items, itemsAddons } from '@/app/_providers/DataContext';
 import { Plan } from '@/app/_providers/DataContext';
 import Image from 'next/image';
-import imageArcade from '@/public/assets/images/icon-arcade.svg';
-import imageAdvanced from '@/public/assets/images/icon-advanced.svg';
-import imagePro from '@/public/assets/images/icon-pro.svg';
+import type { tAddons, tItemsAddons } from '@/app/_providers/DataContext';
 
 const RadioInput = ({
   id,
@@ -54,35 +52,7 @@ const RadioInput = ({
 
 export default function SelectPlan() {
   const { selectPlanRef, billing, setBilling, setPlan, setAddons } = useContext(DataContext);
-  const items = {
-    title: 'Select your plan',
-    description: 'You have the option of monthly or yearly billing.',
-    fields: [
-      {
-        id: 'arcade',
-        title: 'Arcade',
-        // descriptionMonthly: '$9/mo',
-        // descriptionYearly: '$90/yr',
-        costMonthly: 9,
-        costYearly: 90,
-        src: imageArcade as string,
-      },
-      {
-        id: 'advanced',
-        title: 'Advanced',
-        costMonthly: 12,
-        costYearly: 120,
-        src: imageAdvanced as string,
-      },
-      {
-        id: 'pro',
-        title: 'Pro',
-        costMonthly: 15,
-        costYearly: 150,
-        src: imagePro as string,
-      },
-    ],
-  };
+
   const billingType = {
     monthly: 'Monthly',
     yearly: 'Yearly',
@@ -138,15 +108,15 @@ export default function SelectPlan() {
                     ({
                       onlineService: {
                         checked: prev.onlineService.checked,
-                        cost: billing ? 1 : 10,
+                        cost: billing ? itemsAddons.fields[0].costMonthly : itemsAddons.fields[0].costMonthly * 10,
                       },
                       largerStorage: {
                         checked: prev.largerStorage.checked,
-                        cost: billing ? 1 : 10,
+                        cost: billing ? itemsAddons.fields[1].costMonthly : itemsAddons.fields[1].costMonthly * 10,
                       },
                       customizableProfile: {
                         checked: prev.customizableProfile.checked,
-                        cost: billing ? 2 : 20,
+                        cost: billing ? itemsAddons.fields[2].costMonthly : itemsAddons.fields[2].costMonthly * 10,
                       },
                     }) as tAddons,
                 );

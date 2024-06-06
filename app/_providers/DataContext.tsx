@@ -1,5 +1,8 @@
 'use client';
 import { ReactNode, useRef, createContext, RefObject, useState, Dispatch, SetStateAction } from 'react';
+import imageArcade from '@/public/assets/images/icon-arcade.svg';
+import imageAdvanced from '@/public/assets/images/icon-advanced.svg';
+import imagePro from '@/public/assets/images/icon-pro.svg';
 
 export enum Steps {
   YOUR_INFO = 'YOUR INFO',
@@ -19,6 +22,84 @@ export interface tAddons {
   largerStorage: { checked: boolean; cost: number };
   customizableProfile: { checked: boolean; cost: number };
 }
+
+export interface tItemsAddons {
+  title: string;
+  description: string;
+  fields: {
+    id: string;
+    title: string;
+    description?: string;
+    costMonthly: number;
+    costYearly?: number;
+    src?: string;
+  }[];
+}
+
+export interface tItemsSelectPlan {
+  title: string;
+  description: string;
+  fields: {
+    id: string;
+    title: string;
+    costMonthly: number;
+    costYearly: number;
+    src: string;
+  }[];
+}
+
+export const itemsAddons: tItemsAddons = {
+  title: 'Pick add-ons',
+  description: 'Add-ons help enhance your gaming experience.',
+  fields: [
+    {
+      id: 'onlineService',
+      title: 'Online service',
+      description: 'Access to multiplayer games',
+      costMonthly: 1,
+    },
+    {
+      id: 'largerStorage',
+      title: 'Larger storage',
+      description: 'Extra 1TB of cloud save',
+      costMonthly: 1,
+    },
+    {
+      id: 'customizableProfile',
+      title: 'Customizable profile',
+      description: 'Custom theme on your profile',
+      costMonthly: 2,
+    },
+  ],
+};
+
+export const itemsSelectPlan: tItemsSelectPlan = {
+  title: 'Select your plan',
+  description: 'You have the option of monthly or yearly billing.',
+  fields: [
+    {
+      id: 'arcade',
+      title: 'Arcade',
+      costMonthly: 9,
+      costYearly: 90,
+      src: imageArcade as string,
+    },
+    {
+      id: 'advanced',
+      title: 'Advanced',
+      costMonthly: 12,
+      costYearly: 120,
+      src: imageAdvanced as string,
+    },
+    {
+      id: 'pro',
+      title: 'Pro',
+      costMonthly: 15,
+      costYearly: 150,
+      src: imagePro as string,
+    },
+  ],
+};
 
 export const costFormatted = ({
   cost,
