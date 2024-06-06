@@ -70,6 +70,13 @@ export default function Summary() {
         {anyChecked && (
           <div className="flex justify-between px-[24px]">
             <p>{totalTitle}</p>
+            <p className="text-[16px] font-bold text-[#483EFF]">
+              {costFormatted({
+                cost:
+                  plan && plan[1] + Object.values(addons).reduce((acc, cur) => (cur.checked ? acc + cur.cost : acc), 0),
+                billing,
+              })}
+            </p>
           </div>
         )}
       </div>
