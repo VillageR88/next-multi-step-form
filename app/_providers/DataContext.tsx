@@ -137,7 +137,7 @@ export const DataContext = createContext(
     billing: boolean;
     setBilling: Dispatch<SetStateAction<boolean>>;
     plan: [Plan, number] | undefined;
-    setPlan: Dispatch<SetStateAction<[Plan, number] | undefined>>;
+    setPlan: Dispatch<SetStateAction<[Plan, number]>>;
     addons: {
       onlineService: { checked: boolean; cost: number };
       largerStorage: { checked: boolean; cost: number };
@@ -155,7 +155,7 @@ export const DataContext = createContext(
 
 export default function DataProvider({ children }: { children: ReactNode }) {
   const [billing, setBilling] = useState(false);
-  const [plan, setPlan] = useState<[Plan, number] | undefined>(undefined);
+  const [plan, setPlan] = useState<[Plan, number]>([Plan.ARCADE, 9]);
   const [addons, setAddons] = useState<{
     onlineService: { checked: boolean; cost: number };
     largerStorage: { checked: boolean; cost: number };

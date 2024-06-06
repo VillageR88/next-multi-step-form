@@ -1,5 +1,5 @@
 'use client';
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { DataContext, costFormatted, itemsSelectPlan } from '@/app/_providers/DataContext';
 import { Plan } from '@/app/_providers/DataContext';
 import Image from 'next/image';
@@ -10,15 +10,16 @@ const RadioInput = ({
   costMonthly,
   costYearly,
   src,
+  reference,
 }: {
   id: string;
   title: string;
   costMonthly: number;
   costYearly: number;
   src: string;
+  reference: (el: HTMLInputElement) => void;
 }) => {
   const { setPlan, billing } = useContext(DataContext);
-
   const discount = '2 months free';
 
   return (
@@ -27,6 +28,7 @@ const RadioInput = ({
         onChange={(e) => {
           setPlan([e.target.id as Plan, billing ? costYearly : costMonthly]);
         }}
+        ref={reference}
         className="absolute size-0"
         required
         type="radio"
@@ -51,6 +53,11 @@ const RadioInput = ({
 };
 
 export default function SelectPlan() {
+  const radioRef = useRef<HTMLInputElement[]>([]);
+
+  useEffect(() => {
+    if (radioRef.current.length) radioRef.current[0].checked = true;
+  }, []);
   const { selectPlanRef, billing, setBilling, setPlan, setAddons } = useContext(DataContext);
 
   const billingType = {
@@ -73,6 +80,7 @@ export default function SelectPlan() {
             return (
               <li key={index}>
                 <RadioInput
+                  reference={(el) => radioRef.current.push(el)}
                   id={key}
                   title={item.title}
                   costMonthly={item.costMonthly}
@@ -98,7 +106,6 @@ export default function SelectPlan() {
               onChange={() => {
                 setBilling((prev) => !prev);
                 setPlan((prev) => {
-                  if (!prev) return;
                   const newPrev = { ...prev };
                   const planId = prev[0] as string;
                   const plan = itemsSelectPlan.fields[planId];
