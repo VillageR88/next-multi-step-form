@@ -51,28 +51,6 @@ interface tItemsSelectPlan {
 }
 [];
 
-export const itemsAddons: tItemsAddons = {
-  title: 'Pick add-ons',
-  description: 'Add-ons help enhance your gaming experience.',
-  fields: {
-    onlineService: {
-      title: 'Online service',
-      description: 'Access to multiplayer games',
-      costMonthly: 1,
-    },
-    largerStorage: {
-      title: 'Larger storage',
-      description: 'Extra 1TB of cloud save',
-      costMonthly: 1,
-    },
-    customizableProfile: {
-      title: 'Customizable profile',
-      description: 'Custom theme on your profile',
-      costMonthly: 2,
-    },
-  },
-};
-
 export const itemsSelectPlan: tItemsSelectPlan = {
   title: 'Select your plan',
   description: 'You have the option of monthly or yearly billing.',
@@ -91,6 +69,28 @@ export const itemsSelectPlan: tItemsSelectPlan = {
       title: 'Pro',
       costMonthly: 15,
       src: imagePro as string,
+    },
+  },
+};
+
+export const itemsAddons: tItemsAddons = {
+  title: 'Pick add-ons',
+  description: 'Add-ons help enhance your gaming experience.',
+  fields: {
+    onlineService: {
+      title: 'Online service',
+      description: 'Access to multiplayer games',
+      costMonthly: 1,
+    },
+    largerStorage: {
+      title: 'Larger storage',
+      description: 'Extra 1TB of cloud save',
+      costMonthly: 1,
+    },
+    customizableProfile: {
+      title: 'Customizable profile',
+      description: 'Custom theme on your profile',
+      costMonthly: 2,
     },
   },
 };
