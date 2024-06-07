@@ -65,7 +65,7 @@ input[type='radio'] {
 }
 
 .radioParent {
-  @apply flex w-[138px] cursor-pointer flex-col gap-[39px] rounded-[8px] border border-[#D6D9E6] pb-[16px] pl-[24px] pt-[20px] hover:border-[#483EFF];
+  @apply flex screen840:w-[138px] cursor-pointer screen840:flex-col screen1200:gap-[39px] gap-[14px] rounded-[8px] border border-[#D6D9E6] pb-[16px] pl-[24px] pt-[20px] hover:border-[#483EFF];
 }
 
 .checkParent:has(input:focus-visible) {
@@ -113,4 +113,8 @@ input[type='radio'] {
 .summary,
 .selected {
   @apply cursor-default;
+}
+
+.mainComponent {
+  @apply z-10 mx-[16px] mt-[-73px] h-fit w-full max-w-[450px] flex-col gap-[40px] rounded-[10px] bg-white px-[24px] py-[32px] screen840:mt-[40px] screen840:rounded-none screen840:p-0;
 }

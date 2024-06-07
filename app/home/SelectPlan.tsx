@@ -65,16 +65,13 @@ export default function SelectPlan() {
     yearly: 'Yearly',
   };
   return (
-    <div
-      ref={refSelectPlan}
-      className={`group/1 selectPlan mt-[40px] hidden h-[348px] w-full max-w-[450px] flex-col gap-[40px]`}
-    >
+    <div ref={refSelectPlan} className={`group/1 selectPlan mainComponent hidden `}>
       <header className="flex h-[68px] flex-col gap-[11px]">
         <h1>{itemsSelectPlan.title}</h1>
         <p>{itemsSelectPlan.description}</p>
       </header>
       <div className=" flex flex-col gap-[32px]">
-        <ul className="flex gap-[24px]">
+        <ul className="flex flex-col gap-[24px] screen840:flex-row">
           {Object.keys(itemsSelectPlan.fields).map((key, index) => {
             const item = itemsSelectPlan.fields[key];
             return (

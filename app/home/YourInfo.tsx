@@ -34,15 +34,12 @@ export default function YourInfo() {
     },
   };
   return (
-    <div
-      ref={refYourInfo}
-      className="yourInfo selected mt-[40px] flex h-[348px] w-full max-w-[450px] flex-col gap-[40px]"
-    >
+    <div ref={refYourInfo} className="yourInfo selected mainComponent flex">
       <header className="flex h-[68px] flex-col gap-[11px]">
         <h1>{items.title}</h1>
         <p>{items.description}</p>
       </header>
-      <ul className="flex h-[264px] w-full flex-col gap-[24px]">
+      <ul className="flex w-full flex-col gap-[24px]">
         {Object.values(items.fields).map((field) => (
           <li className="inputDiv" key={field.id}>
             <div className="flex items-center justify-between">

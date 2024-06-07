@@ -15,6 +15,20 @@ const titles = {
   buttonNext: 'Next Step',
   confirm: 'Confirm',
 };
+const selected = 'selected';
+const hidden = 'hidden';
+const flex = 'flex';
+const invisible = 'invisible';
+const errorInput = 'errorInput';
+
+const formatNumber = (number: string): string => {
+  number = number.replaceAll(' ', '');
+  number = number.replaceAll('-', '');
+  number = number.replaceAll('+', '');
+  number = number.replaceAll('(', '');
+  number = number.replaceAll(')', '');
+  return number;
+};
 
 const SubmitButton = ({ refButtonConfirm }: { refButtonConfirm: React.RefObject<HTMLButtonElement> }) => {
   const { pending } = useFormStatus();
@@ -86,18 +100,18 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (state.redirection && refDivButtons.current) {
-      refDivButtons.current.classList.add('hidden');
-      refThankYou.current?.classList.remove('hidden');
-      refThankYou.current?.classList.add('flex');
-      refSummary.current?.classList.add('hidden');
-      refSummary.current?.classList.remove('flex');
+      refDivButtons.current.classList.add(hidden);
+      refThankYou.current?.classList.remove(hidden);
+      refThankYou.current?.classList.add(flex);
+      refSummary.current?.classList.add(hidden);
+      refSummary.current?.classList.remove(flex);
     }
   }, [refDivButtons, refThankYou, state.redirection, refSummary]);
 
   return (
     <main className="group/home relative z-0 flex min-h-dvh flex-col items-center overflow-x-clip font-ubuntu sm:min-h-screen screen840:justify-center screen840:px-6">
-      <div className="flex h-[600px] w-full max-w-[940px] flex-col items-center justify-between rounded-[15px] screen840:flex-row screen840:bg-white screen840:py-[16px] screen840:pl-[16px]">
-        <div className="relative flex min-h-[172px] w-full justify-center object-cover screen840:block screen840:min-h-[568px] screen840:w-fit screen840:min-w-[274px]">
+      <div className="flex w-full max-w-[940px] flex-col items-center justify-between rounded-[15px] screen840:h-[600px] screen840:flex-row screen840:bg-white screen840:py-[16px] screen840:pl-[16px]">
+        <div className="relative flex h-[172px] w-full justify-center object-cover screen840:block screen840:min-h-[568px] screen840:w-fit screen840:min-w-[274px]">
           <Image
             priority
             className="absolute hidden screen840:block"
@@ -107,12 +121,12 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
           />
           <Image
             priority
-            className="absolute block screen840:hidden"
+            className="absolute object-cover screen840:hidden"
             fill
             src={imageSidebarMobile as string}
             alt="sidebar background image"
           />
-          <ul className="relative z-10 mt-[40px] flex h-[228px] gap-[16px] screen840:flex-col screen840:gap-[32px] screen840:pl-[32px]">
+          <ul className="relative z-10 mt-[32px] flex h-[228px] gap-[16px] screen840:mt-[40px] screen840:flex-col screen840:gap-[32px] screen840:pl-[32px]">
             {Object.values(items).map((item, index) => (
               <li key={index} className="flex h-[33px] items-center gap-[16px]">
                 <Circle index={index} />
@@ -124,81 +138,79 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
             ))}
           </ul>
         </div>
-        <form action={action} className="flex size-full flex-col items-center justify-center pb-[16px]">
+        <form
+          action={action}
+          className="flex size-full min-h-full flex-col items-center justify-center gap-[24px] screen840:pb-[16px]"
+        >
           <div className="flex size-full justify-center">{children}</div>
-          <div ref={refDivButtons} className="flex h-[48px] w-full max-w-[450px] items-center justify-between ">
+          <div
+            ref={refDivButtons}
+            className="flex min-h-[48px] w-full max-w-[450px] items-center justify-between bg-white p-[16px] screen840:bg-none screen840:p-0 "
+          >
             <button
               onClick={() => {
                 if (
                   refSelectPlan.current &&
-                  refSelectPlan.current.classList.contains('selected') &&
+                  refSelectPlan.current.classList.contains(selected) &&
                   refYourInfo.current
                 ) {
-                  refButtonPrevious.current?.classList.add('invisible');
-                  refSelectPlan.current.classList.remove('selected');
-                  refSelectPlan.current.classList.add('hidden');
-                  refSelectPlan.current.classList.remove('flex');
-                  refYourInfo.current.classList.add('selected');
-                  refYourInfo.current.classList.remove('hidden');
-                  refYourInfo.current.classList.add('flex');
+                  refButtonPrevious.current?.classList.add(invisible);
+                  refSelectPlan.current.classList.remove(selected);
+                  refSelectPlan.current.classList.add(hidden);
+                  refSelectPlan.current.classList.remove(flex);
+                  refYourInfo.current.classList.add(selected);
+                  refYourInfo.current.classList.remove(hidden);
+                  refYourInfo.current.classList.add(flex);
                 }
-                if (refAddons.current && refAddons.current.classList.contains('selected') && refSelectPlan.current) {
-                  refAddons.current.classList.remove('selected');
-                  refAddons.current.classList.add('hidden');
-                  refAddons.current.classList.remove('flex');
-                  refSelectPlan.current.classList.add('selected');
-                  refSelectPlan.current.classList.remove('hidden');
-                  refSelectPlan.current.classList.add('flex');
+                if (refAddons.current && refAddons.current.classList.contains(selected) && refSelectPlan.current) {
+                  refAddons.current.classList.remove(selected);
+                  refAddons.current.classList.add(hidden);
+                  refAddons.current.classList.remove(flex);
+                  refSelectPlan.current.classList.add(selected);
+                  refSelectPlan.current.classList.remove(hidden);
+                  refSelectPlan.current.classList.add(flex);
                 }
-                if (refSummary.current && refSummary.current.classList.contains('selected') && refAddons.current) {
-                  refSummary.current.classList.remove('selected');
-                  refSummary.current.classList.add('hidden');
-                  refSummary.current.classList.remove('flex');
-                  refAddons.current.classList.add('selected');
-                  refAddons.current.classList.remove('hidden');
-                  refAddons.current.classList.add('flex');
-                  refButtonNext.current?.classList.remove('hidden');
-                  refButtonConfirm.current?.classList.remove('flex');
-                  refButtonConfirm.current?.classList.add('hidden');
+                if (refSummary.current && refSummary.current.classList.contains(selected) && refAddons.current) {
+                  refSummary.current.classList.remove(selected);
+                  refSummary.current.classList.add(hidden);
+                  refSummary.current.classList.remove(flex);
+                  refAddons.current.classList.add(selected);
+                  refAddons.current.classList.remove(hidden);
+                  refAddons.current.classList.add(flex);
+                  refButtonNext.current?.classList.remove(hidden);
+                  refButtonConfirm.current?.classList.remove(flex);
+                  refButtonConfirm.current?.classList.add(hidden);
                 }
               }}
               ref={refButtonPrevious}
               type="button"
-              className={`invisible h-[18px] w-[60px] text-[#9699AA]`}
+              className={`invisible w-[60px] text-[#9699AA] screen840:h-[18px]`}
             >
               {titles.buttonPrevious}
             </button>
             <button
               ref={refButtonNext}
               onClick={() => {
-                if (
-                  refYourInfo.current &&
-                  refYourInfo.current.classList.contains('selected') &&
-                  refSelectPlan.current
-                ) {
+                if (refYourInfo.current && refYourInfo.current.classList.contains(selected) && refSelectPlan.current) {
                   let error = false;
                   if (refTel.current?.value === '') {
                     if (refTelError.current) refTelError.current.textContent = errorMessages.fieldRequired;
-                    refTel.current.classList.add('errorInput');
+                    refTel.current.classList.add(errorInput);
                     refTel.current.focus();
                     error = true;
                   } else if (refTel.current) {
                     let telFormatted = refTel.current.value;
-                    telFormatted = telFormatted.replaceAll(' ', '');
-                    telFormatted = telFormatted.replaceAll('-', '');
-                    telFormatted = telFormatted.replaceAll('+', '');
-                    telFormatted = telFormatted.replaceAll('(', '');
-                    telFormatted = telFormatted.replaceAll(')', '');
+                    telFormatted = formatNumber(telFormatted);
                     if (!/^\d{7,15}$/.test(telFormatted)) {
                       if (refTelError.current) refTelError.current.textContent = errorMessages.invalidTel;
-                      refTel.current.classList.add('errorInput');
+                      refTel.current.classList.add(errorInput);
                       refTel.current.focus();
                       error = true;
                     }
                   }
                   if (refMail.current && refMail.current.value === '') {
                     if (refMailError.current) refMailError.current.textContent = errorMessages.fieldRequired;
-                    refMail.current.classList.add('errorInput');
+                    refMail.current.classList.add(errorInput);
                     refMail.current.focus();
                     error = true;
                   } else if (
@@ -206,41 +218,41 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
                     !/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/.test(refMail.current.value)
                   ) {
                     if (refMailError.current) refMailError.current.textContent = errorMessages.invalidEmail;
-                    refMail.current.classList.add('errorInput');
+                    refMail.current.classList.add(errorInput);
                     refMail.current.focus();
                     error = true;
                   }
                   if (refName.current && refName.current.value === '') {
                     if (refNameError.current) refNameError.current.textContent = errorMessages.fieldRequired;
-                    refName.current.classList.add('errorInput');
+                    refName.current.classList.add(errorInput);
                     refName.current.focus();
                     error = true;
                   }
                   if (error) return;
-                  refButtonPrevious.current?.classList.remove('invisible');
-                  refYourInfo.current.classList.remove('selected');
-                  refYourInfo.current.classList.add('hidden');
-                  refYourInfo.current.classList.remove('flex');
-                  refSelectPlan.current.classList.add('selected');
-                  refSelectPlan.current.classList.remove('hidden');
-                  refSelectPlan.current.classList.add('flex');
-                } else if (refSelectPlan.current?.classList.contains('selected') && refAddons.current) {
-                  refSelectPlan.current.classList.remove('selected');
-                  refSelectPlan.current.classList.add('hidden');
-                  refSelectPlan.current.classList.remove('flex');
-                  refAddons.current.classList.add('selected');
-                  refAddons.current.classList.remove('hidden');
-                  refAddons.current.classList.add('flex');
-                } else if (refAddons.current?.classList.contains('selected') && refSummary.current) {
-                  refAddons.current.classList.remove('selected');
-                  refAddons.current.classList.add('hidden');
-                  refAddons.current.classList.remove('flex');
-                  refSummary.current.classList.add('selected');
-                  refSummary.current.classList.remove('hidden');
-                  refSummary.current.classList.add('flex');
-                  refButtonNext.current?.classList.add('hidden');
-                  refButtonConfirm.current?.classList.remove('hidden');
-                  refButtonConfirm.current?.classList.add('flex');
+                  refButtonPrevious.current?.classList.remove(invisible);
+                  refYourInfo.current.classList.remove(selected);
+                  refYourInfo.current.classList.add(hidden);
+                  refYourInfo.current.classList.remove(flex);
+                  refSelectPlan.current.classList.add(selected);
+                  refSelectPlan.current.classList.remove(hidden);
+                  refSelectPlan.current.classList.add(flex);
+                } else if (refSelectPlan.current?.classList.contains(selected) && refAddons.current) {
+                  refSelectPlan.current.classList.remove(selected);
+                  refSelectPlan.current.classList.add(hidden);
+                  refSelectPlan.current.classList.remove(flex);
+                  refAddons.current.classList.add(selected);
+                  refAddons.current.classList.remove(hidden);
+                  refAddons.current.classList.add(flex);
+                } else if (refAddons.current?.classList.contains(selected) && refSummary.current) {
+                  refAddons.current.classList.remove(selected);
+                  refAddons.current.classList.add(hidden);
+                  refAddons.current.classList.remove(flex);
+                  refSummary.current.classList.add(selected);
+                  refSummary.current.classList.remove(hidden);
+                  refSummary.current.classList.add(flex);
+                  refButtonNext.current?.classList.add(hidden);
+                  refButtonConfirm.current?.classList.remove(hidden);
+                  refButtonConfirm.current?.classList.add(flex);
                 }
               }}
               type="button"

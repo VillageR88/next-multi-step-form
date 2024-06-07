@@ -15,10 +15,7 @@ export default function Addons() {
   };
 
   return (
-    <div
-      ref={refAddons}
-      className={`group/1 addons mt-[40px] hidden h-[348px] w-full max-w-[450px] flex-col gap-[40px]`}
-    >
+    <div ref={refAddons} className={`group/1 addons mainComponent hidden`}>
       <header className="flex h-[68px] flex-col gap-[11px]">
         <h1>{itemsAddons.title}</h1>
         <p>{itemsAddons.description}</p>

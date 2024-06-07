@@ -9,10 +9,7 @@ export default function Summary() {
   const anyChecked = addons.onlineService.checked || addons.largerStorage.checked || addons.customizableProfile.checked;
   const totalTitle = 'Total ' + (billing ? '(per year)' : '(per month)');
   return (
-    <div
-      ref={refSummary}
-      className={`group/1 summary mt-[40px] hidden h-[348px] w-full max-w-[450px] flex-col gap-[40px]`}
-    >
+    <div ref={refSummary} className={`group/1 summary mainComponent hidden`}>
       <header className="flex h-[68px] flex-col gap-[11px]">
         <h1>{itemsSummary.title}</h1>
         <p>{itemsSummary.description}</p>
