@@ -94,11 +94,8 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
   }, [refDivButtons, refThankYou, state.redirection, refSummary]);
 
   return (
-    <main className="group/home relative z-0 flex min-h-dvh flex-col items-center justify-center overflow-x-clip px-6 font-ubuntu sm:min-h-screen">
-      <form
-        action={action}
-        className="flex h-[600px] w-full max-w-[940px] items-center justify-between gap-[100px] rounded-[15px] bg-white py-[16px] pl-[16px] pr-[100px]"
-      >
+    <main className="group/home relative z-0 flex  min-h-dvh flex-col items-center justify-center overflow-x-clip px-6 font-ubuntu sm:min-h-screen">
+      <div className="screen840:flex-row flex h-[600px] w-full max-w-[940px] flex-col items-center justify-between rounded-[15px] bg-white py-[16px] pl-[16px]">
         <div className="relative min-h-[568px] min-w-[274px]">
           <Image
             priority
@@ -119,9 +116,9 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
             ))}
           </ul>
         </div>
-        <div className="flex size-full flex-col pb-[16px]">
-          <div className="size-full">{children}</div>
-          <div ref={refDivButtons} className="flex h-[48px] w-full items-center justify-between">
+        <form action={action} className="flex size-full flex-col items-center justify-center pb-[16px]">
+          <div className="flex size-full justify-center">{children}</div>
+          <div ref={refDivButtons} className="flex h-[48px] w-full max-w-[450px] items-center justify-between ">
             <button
               onClick={() => {
                 if (
@@ -245,8 +242,8 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
             </button>
             <SubmitButton refButtonConfirm={refButtonConfirm} />
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </main>
   );
 }

@@ -12,6 +12,7 @@ const config: Config = {
         evenSmallerScreen: '240px',
         verySmallScreen: '360px',
         tablet: '700px',
+        screen840: '840px',
         screen1200: '1200px',
         screenInBetween: '1024px',
       },
