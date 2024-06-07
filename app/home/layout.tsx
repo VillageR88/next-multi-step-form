@@ -3,6 +3,7 @@ import { ReactNode, createRef, useContext, useEffect } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
 import Image from 'next/image';
 import imageSidebarDesktop from '@/public/assets/images/bg-sidebar-desktop.svg';
+import imageSidebarMobile from '@/public/assets/images/bg-sidebar-mobile.svg';
 import { Steps } from '@/app/_providers/DataContext';
 import { useFormState, useFormStatus } from 'react-dom';
 import Loader from '../components/Loader';
@@ -94,21 +95,28 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
   }, [refDivButtons, refThankYou, state.redirection, refSummary]);
 
   return (
-    <main className="group/home relative z-0 flex  min-h-dvh flex-col items-center justify-center overflow-x-clip px-6 font-ubuntu sm:min-h-screen">
-      <div className="screen840:flex-row flex h-[600px] w-full max-w-[940px] flex-col items-center justify-between rounded-[15px] bg-white py-[16px] pl-[16px]">
-        <div className="relative min-h-[568px] min-w-[274px]">
+    <main className="group/home relative z-0 flex min-h-dvh flex-col items-center overflow-x-clip font-ubuntu sm:min-h-screen screen840:justify-center screen840:px-6">
+      <div className="flex h-[600px] w-full max-w-[940px] flex-col items-center justify-between rounded-[15px] screen840:flex-row screen840:bg-white screen840:py-[16px] screen840:pl-[16px]">
+        <div className="relative flex min-h-[172px] w-full justify-center object-cover screen840:block screen840:min-h-[568px] screen840:w-fit screen840:min-w-[274px]">
           <Image
             priority
-            className="absolute"
+            className="absolute hidden screen840:block"
             fill
             src={imageSidebarDesktop as string}
             alt="sidebar background image"
           />
-          <ul className="relative z-10 mt-[40px] flex h-[228px] flex-col gap-[32px] pl-[32px]">
+          <Image
+            priority
+            className="absolute block screen840:hidden"
+            fill
+            src={imageSidebarMobile as string}
+            alt="sidebar background image"
+          />
+          <ul className="relative z-10 mt-[40px] flex h-[228px] gap-[16px] screen840:flex-col screen840:gap-[32px] screen840:pl-[32px]">
             {Object.values(items).map((item, index) => (
               <li key={index} className="flex h-[33px] items-center gap-[16px]">
                 <Circle index={index} />
-                <div className="flex flex-col">
+                <div className="hidden flex-col screen840:flex">
                   <span className="text-[12px] text-[#ABBCFF]">{titles.step + [index + 1].toString()}</span>
                   <span className="text-[14px] font-bold text-white">{item}</span>
                 </div>
