@@ -15,10 +15,12 @@ export default function Summary() {
         <p>{itemsSummary.description}</p>
       </header>
       <div className="flex flex-col gap-[24px]">
-        <div className="flex flex-col gap-[24px] rounded-[8px] bg-[#F8F9FF] px-[24px] pb-[24px] pt-[16px]">
+        <div className="flex flex-col gap-[16px] rounded-[8px] bg-[#F8F9FF] px-[24px] pb-[24px] pt-[16px]">
           <div className="flex items-center justify-between">
-            <div className="flex flex-col gap-[7px]">
-              <h2>{plan && plan[0][0].toUpperCase() + plan[0].slice(1) + billingText.toString()}</h2>
+            <div className="flex flex-col gap-[4px]">
+              <h2 className="text-[14px] screen840:text-[16px]">
+                {plan && plan[0][0].toUpperCase() + plan[0].slice(1) + billingText.toString()}
+              </h2>
               <button
                 onClick={() => {
                   if (!refSummary.current || !refSelectPlan.current) return;
@@ -33,7 +35,7 @@ export default function Summary() {
                   refButtonConfirm.current?.classList.remove('flex');
                 }}
                 type="button"
-                className="w-fit text-[14px] leading-[20px] text-[#9699AA] underline underline-offset-2"
+                className="w-fit text-[14px] leading-[20px] text-[#9699AA] underline underline-offset-[3px] screen840:underline-offset-2"
               >
                 Change
               </button>
@@ -46,7 +48,7 @@ export default function Summary() {
             </p>
           </div>
           {anyChecked && (
-            <div className="flex flex-col gap-[16px] text-[14px] text-[#9699AA]">
+            <div className="flex flex-col gap-[12px] text-[14px] text-[#9699AA] screen840:gap-[16px]">
               <div className="h-px w-full bg-[#9699AA]/20"></div>
               {Object.keys(addons).map((key) => {
                 return (
@@ -70,7 +72,7 @@ export default function Summary() {
         {anyChecked && (
           <div className="flex justify-between px-[24px]">
             <p>{totalTitle}</p>
-            <p className="text-[16px] font-bold text-[#483EFF]">
+            <p className="text-[16px] font-bold leading-[20px] text-[#483EFF] screen840:text-[20px]">
               {costFormatted({
                 cost:
                   plan && plan[1] + Object.values(addons).reduce((acc, cur) => (cur.checked ? acc + cur.cost : acc), 0),

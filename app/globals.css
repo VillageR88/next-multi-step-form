@@ -19,7 +19,7 @@ input:-webkit-autofill:active {
 }
 
 h1 {
-  @apply text-[32px] font-bold text-[#022959];
+  @apply screen840:text-[32px] text-[24px] font-bold text-[#022959];
 }
 
 h2 {
@@ -44,7 +44,7 @@ label {
 input[type='text'],
 input[type='email'],
 input[type='tel'] {
-  @apply h-[48px] w-full rounded-[8px] border px-[16px] text-[16px] font-medium leading-[25px] outline-none placeholder:text-[#9699AA];
+  @apply h-[48px] w-full rounded-[8px] border px-[16px] screen840:text-[16px] text-[15px] font-medium leading-[25px] outline-none placeholder:text-[#9699AA];
 }
 input[type='text']:not(.errorInput),
 input[type='email']:not(.errorInput),

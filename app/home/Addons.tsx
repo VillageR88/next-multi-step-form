@@ -26,7 +26,10 @@ export default function Addons() {
 
           return (
             <li className="flex" key={index}>
-              <label htmlFor={field} className="checkParent group flex items-center gap-[24px] px-[24px]">
+              <label
+                htmlFor={field}
+                className="checkParent group flex items-center gap-[16px] px-[24px] screen840:gap-[24px]"
+              >
                 <input
                   onChange={(e) => {
                     setAddons((prev) => ({
@@ -54,8 +57,8 @@ export default function Addons() {
                 </div>
                 <div className="flex w-full items-center justify-between">
                   <div className="flex flex-col gap-[7px]">
-                    <h2>{item.title}</h2>
-                    <p>{item.description}</p>
+                    <h2 className="text-[14px] screen840:text-[16px]">{item.title}</h2>
+                    <p className="text-[12px] screen840:text-[15px]">{item.description}</p>
                   </div>
                   <span className="addonCost">{formatCost(item.costMonthly)}</span>
                 </div>
