@@ -4,6 +4,6 @@
   ],
   "hints": {
     "apple-touch-icons": "off",
-    "axe/aria": "off"
+    "axe/forms": "off"
   }
 }
