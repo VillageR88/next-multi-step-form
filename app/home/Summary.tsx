@@ -4,7 +4,9 @@ import { DataContext, costFormatted, itemsSummary, itemsAddons } from '@/app/_pr
 
 export default function Summary() {
   const { refSummary, billing, plan, refSelectPlan, addons, refButtonNext, refButtonConfirm } = useContext(DataContext);
-
+  const selected = 'selected';
+  const hidden = 'hidden';
+  const flex = 'flex';
   const billingText = billing ? itemsSummary.billing.yearly : itemsSummary.billing.monthly;
   const anyChecked = addons.onlineService.checked || addons.largerStorage.checked || addons.customizableProfile.checked;
   const totalTitle = 'Total ' + (billing ? '(per year)' : '(per month)');
@@ -24,15 +26,15 @@ export default function Summary() {
               <button
                 onClick={() => {
                   if (!refSummary.current || !refSelectPlan.current) return;
-                  refSummary.current.classList.remove('selected');
-                  refSummary.current.classList.add('hidden');
-                  refSummary.current.classList.remove('flex');
-                  refSelectPlan.current.classList.add('selected');
-                  refSelectPlan.current.classList.remove('hidden');
-                  refSelectPlan.current.classList.add('flex');
-                  refButtonNext.current?.classList.remove('hidden');
-                  refButtonConfirm.current?.classList.add('hidden');
-                  refButtonConfirm.current?.classList.remove('flex');
+                  refSummary.current.classList.remove(selected);
+                  refSummary.current.classList.add(hidden);
+                  refSummary.current.classList.remove(flex);
+                  refSelectPlan.current.classList.add(selected);
+                  refSelectPlan.current.classList.remove(hidden);
+                  refSelectPlan.current.classList.add(flex);
+                  refButtonNext.current?.classList.remove(hidden);
+                  refButtonConfirm.current?.classList.add(hidden);
+                  refButtonConfirm.current?.classList.remove(flex);
                 }}
                 type="button"
                 className="w-fit text-[14px] leading-[20px] text-[#9699AA] underline underline-offset-[3px] screen840:underline-offset-2"
