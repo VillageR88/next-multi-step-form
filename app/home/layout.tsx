@@ -109,8 +109,8 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
   }, [refDivButtons, refThankYou, state.redirection, refSummary]);
 
   return (
-    <main className="group/home relative z-0 flex min-h-dvh flex-col items-center overflow-x-clip font-ubuntu sm:min-h-screen screen840:justify-center screen840:px-6">
-      <div className="flex w-full max-w-[940px] flex-col items-center justify-between rounded-[15px] screen840:h-[600px] screen840:flex-row screen840:bg-white screen840:py-[16px] screen840:pl-[16px]">
+    <main className="group/home relative z-0 flex  h-dvh flex-col items-center overflow-x-clip font-ubuntu sm:min-h-screen screen840:justify-center screen840:px-6">
+      <div className="flex size-full max-w-[940px] flex-col items-center justify-between rounded-[15px] screen840:h-[600px] screen840:flex-row screen840:bg-white screen840:py-[16px] screen840:pl-[16px]">
         <div className="relative flex h-[172px] w-full justify-center object-cover screen840:block screen840:min-h-[568px] screen840:w-fit screen840:min-w-[274px]">
           <Image
             priority
@@ -140,7 +140,7 @@ export default function LayoutHome({ children }: { children: ReactNode }) {
         </div>
         <form
           action={action}
-          className="flex size-full min-h-full flex-col items-center justify-center gap-[24px] screen840:pb-[16px]"
+          className="flex size-full h-full flex-col items-center justify-center gap-[24px] screen840:pb-[16px]"
         >
           <div className="flex size-full justify-center">{children}</div>
           <div
