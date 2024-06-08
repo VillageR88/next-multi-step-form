@@ -14,7 +14,7 @@ export default function ThankYou() {
   return (
     <div
       ref={refThankYou}
-      className="screen:mt-0 z-10 mt-[-73px] hidden h-fit min-h-[400px] w-full max-w-[450px] flex-col items-center justify-center rounded-[10px] bg-white px-[24px] text-center screen840:mt-0 screen840:h-full screen840:min-h-fit screen840:rounded-none screen840:p-0"
+      className="screen:mt-0 z-10 mx-[16px] mt-[-73px] hidden h-fit min-h-[400px] w-full max-w-[450px] flex-col items-center justify-center rounded-[10px] bg-white px-[24px] text-center screen840:mt-0 screen840:h-full screen840:min-h-fit screen840:rounded-none screen840:p-0"
     >
       <Image width={80} height={80} className="size-[80px]" src={imageThankYou as string} alt="Thank you" />
       <h1 className="mt-[32px]">{items.title}</h1>
