@@ -1,26 +1,13 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Kumbh_Sans, Roboto_Slab, Space_Mono } from 'next/font/google';
+import { Ubuntu } from 'next/font/google';
+import DataProvider from '@/app/_providers/DataContext';
 import { ReactNode } from 'react';
 
-const kumbhSans = Kumbh_Sans({
+const ubuntu = Ubuntu({
   display: 'swap',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-kumbh-sans',
-  subsets: ['latin'],
-});
-
-const robotoSlab = Roboto_Slab({
-  display: 'swap',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-roboto-slab',
-  subsets: ['latin'],
-});
-
-const spaceMono = Space_Mono({
-  display: 'swap',
-  weight: ['400', '700'],
-  variable: '--font-space-mono',
+  weight: ['300', '400', '500', '700'],
+  variable: '--font-ubuntu',
   subsets: ['latin'],
 });
 
@@ -39,8 +26,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link>
         <meta property="og:image" content={undefined} />
       </head>
-      <body className={`${kumbhSans.variable} ${robotoSlab.variable} ${spaceMono.variable} bg-[#EFF5FF]`}>
-        {children}
+      <body className={`${ubuntu.variable} bg-[#EFF5FF]`}>
+        <DataProvider>{children}</DataProvider>
       </body>
     </html>
   );
